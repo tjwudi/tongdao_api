@@ -13,11 +13,6 @@ class Project < ActiveRecord::Base
 
   has_many :boxes
 
-  has_many :task_groups
-
-  has_many :tag_attachments
-  has_many :tags, through: :tag_attachments, source: :tag
-
   validates :title, presence: true
   validates :school, presence: true
   validates :state, presence: true

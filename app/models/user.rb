@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-
-
   has_many :memberships
   has_many :projects, through: :memberships, source: :project
 
@@ -14,19 +12,6 @@ class User < ActiveRecord::Base
   has_many :stickers_users
   has_many :related_stickers, through: :stickers_users, source: :sticker
 
-  has_many :tasks_users
-  has_many :related_tasks, through: :tasks_users, source: :task
-
-  has_many :observe_entries
-
-  has_many :observe_likes
-  has_many :liked_observe_entries, through: :observe_likes, source: :observe_entry
-
-  has_many :thread_likes
-  has_many :liked_threads, through: :thread_likes, source: :observe_thread
-
-  has_many :thread_dislikes
-  has_many :disliked_threads, through: :thread_dislikes, source: :observe_thread
 
 
   def self.authorize(email, encrypted_password)

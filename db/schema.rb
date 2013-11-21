@@ -43,43 +43,6 @@ ActiveRecord::Schema.define(version: 20131117083439) do
   add_index "memberships", ["project_id"], name: "index_memberships_on_project_id", using: :btree
   add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
 
-  create_table "observe_entries", force: true do |t|
-    t.string   "title"
-    t.text     "summary"
-    t.string   "feature_photo"
-    t.integer  "user_id"
-    t.integer  "count_of_observe_likes",   default: 0, null: false
-    t.integer  "count_of_observe_threads", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "observe_entries", ["user_id"], name: "index_observe_entries_on_user_id", using: :btree
-
-  create_table "observe_likes", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "observe_entry_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "observe_likes", ["observe_entry_id"], name: "index_observe_likes_on_observe_entry_id", using: :btree
-  add_index "observe_likes", ["user_id"], name: "index_observe_likes_on_user_id", using: :btree
-
-  create_table "observe_threads", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "observe_entry_id"
-    t.text     "content"
-    t.boolean  "is_primary"
-    t.integer  "count_of_thread_likes",   default: 0, null: false
-    t.integer  "count_of_thread_dislike", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "observe_threads", ["observe_entry_id"], name: "index_observe_threads_on_observe_entry_id", using: :btree
-  add_index "observe_threads", ["user_id"], name: "index_observe_threads_on_user_id", using: :btree
-
   create_table "pending_users", force: true do |t|
     t.string   "email",      null: false
     t.datetime "created_at"
@@ -176,56 +139,6 @@ ActiveRecord::Schema.define(version: 20131117083439) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
-
-  create_table "task_groups", force: true do |t|
-    t.integer  "project_id"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "task_groups", ["project_id"], name: "index_task_groups_on_project_id", using: :btree
-
-  create_table "tasks", force: true do |t|
-    t.integer  "task_group_id"
-    t.integer  "progress"
-    t.integer  "priority"
-    t.text     "log"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "tasks", ["task_group_id"], name: "index_tasks_on_task_group_id", using: :btree
-
-  create_table "tasks_users", force: true do |t|
-    t.integer  "task_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "tasks_users", ["task_id"], name: "index_tasks_users_on_task_id", using: :btree
-  add_index "tasks_users", ["user_id"], name: "index_tasks_users_on_user_id", using: :btree
-
-  create_table "thread_dislikes", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "observe_thread_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "thread_dislikes", ["observe_thread_id"], name: "index_thread_dislikes_on_observe_thread_id", using: :btree
-  add_index "thread_dislikes", ["user_id"], name: "index_thread_dislikes_on_user_id", using: :btree
-
-  create_table "thread_likes", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "observe_thread_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "thread_likes", ["observe_thread_id"], name: "index_thread_likes_on_observe_thread_id", using: :btree
-  add_index "thread_likes", ["user_id"], name: "index_thread_likes_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",              null: false
