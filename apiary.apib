@@ -1,0 +1,414 @@
+FORMAT: 1A
+HOST: http://apis.tongdao.in
+
+# TongDao v1.0
+The backend apis document of tongdao.in.
+
+# Group Users
+## Users Collection [/users{?auto_complete_word, count}]
+### List users [GET]
+Only list user's open information.  
+This API only works for project member invitation page. 
++ Parameters 
+    + auto_complete_word (required, string) ... key word for auto completion
+    + count (required, string)
+
++ Request 
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
++ Response 200
+    + Body
+    
+            [
+            {
+            "nickname": "wooo",
+            "avatar": "http://img.tongdao.in/avatar/20132.jpg",
+            "school": "同济大学",
+            "speciality": "编程，音乐",
+            "gender": "男",
+            "id": 8
+            }
+            ]
+
+### Create a User [POST]
+Create a new user. Returns a new token for the User.
+When error occurs, it returns HTTP 500 with an empty json array.  
+Duplicated records error will be shown as 500 error, too. In this case, `email` and `nickname` field are unique in database.
++ Request (application/json)
+    + Body
+    
+            {
+            "nickname" : "johnwu",
+            "email" : "webmaster@leapoahead.com",
+            "encrypted_password" : "abcabc"
+            }
+
++ Response 201 (application/json)
+    + Body 
+    
+            {
+            "token": "theusertoken", 
+            "email": "webmaster@leapoahead.com" 
+            }
+
+## User Collection [/users/{id}]
+
++ Parameters 
+    + id(string, required) ... The user id
+
+### Update user information [PATCH]
+Pass the information you want to change as key-value pair. The key can be following fields in `User` model:
+
+- `nickname`
+- `gender`
+- `contact`
+- `school`
+- `speciality`
+- `avatar`
+
+HTTP 500 when error occurs (like duplication in `nickname` field)
+
++ Request (application/json)
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+            
+    + Body
+
+            {
+            "encrypted_password": "aaaaaa"
+            }
+
++ Response 200
+    + Body
+
+            []
+
+## Users Counter Collection [/users/count]
+### Get the count of all users [GET]
++ Response 200 (application/json)
+    + Body
+
+            {
+            "count": 402000
+            }
+
+
+## Pending Users Collection [/pending_users]
+### Create a pending user [POST]
+Create a new pending user. A pending user is **unactived** user, who just provided his/her email for activation.  
+Returns the pending user object.  
+If any error occurs (duplicated email field), response it with HTTP 500 error.
+
++ Request (application/json)
+    + Body
+    
+            {
+            "email": "webmaster@leapoahead.com"
+            }
+
++ Response 201 (application/json)
+    + Body
+    
+            {
+            "id":4,
+            "email":"webmaster@leapoahead.com",
+            "created_at":"2013-11-16T10:47:57.149Z",
+            "updated_at":"2013-11-16T10:47:57.149Z"
+            }
+
+### Delete a pending user [DELETE]
+Just ... Destroy it. Returns HTTP 500 when failed.
+
++ Request (application/json)
+    + Body
+
+            {
+            "id": 1
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            []
+
+## Pending Users Counter [/pending_user/count{?email}]
+### Get count of pending users meets the criterias [GET]
+Query for the count of pending user meets the criterias provided by params. In this case, the email field.  
+Returns a json object which owns a `count` field. 
+
++ Parameters
+    + email(required, string) ... user's email
+
++ Response 200 (application/json)
+    + Body
+
+            {
+            "count": 1
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Group Sessions
+## Sessions Collection [/sessions]
+### Create a new session [POST]
+Used for user login. If succeed, returns a new session.  
+HTTP 401 for failed email&password pair.
+
++ Request (application/json)
+    + Body
+        
+            {
+            "email": "webmaster@leapoahead.com",
+            "encrypted_password": "abcabc"
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+            "token": "theusertoken", 
+            "id": 123
+            }
+
+## Session Collection [/sessions/{id}]
+
++ Parameters 
+    + id(string, required) ... The token id
+    
+### Destroy a session [DELETE]
+HTTP 401 when unauthorized, HTTP 500 when unknown error.
++ Request 
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
++ Response 200
+    + Body
+
+            []
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Group Projects
+## Projects Collection [/projects{?offset,count,tags}]
+### Get projects list [GET]
+Get projects information, given an offset value and count.  
+
++ Parameters
+    + offset(required, integer) ... offset position
+    + count(required, integer) ... count of items wanted
+    + tag(comma splited string) ... tag name
+
++ Response 200 (application/json)
+    + Body 
+
+            [
+            {
+            "id": 21,
+            "title": "校园绿化项目",
+            "tags": [{"name":"School"},{"name":"Cooking"}],
+            "school": "同济大学",
+            "state": "招人中",
+            "created_at":"2013-11-16T10:47:57.149Z",
+            "updated_at":"2013-11-16T10:47:57.149Z"
+            },
+            {
+            "id": 22,
+            "title": "校园绿化项目2",
+            "tags": [{"name":"School"}],
+            "school": "同济大学",
+            "state": "进行中",
+            "created_at":"2013-11-16T10:47:57.149Z",
+            "updated_at":"2013-11-16T10:47:57.149Z"
+            }
+            ]
+
+### Create a new project [POST]
+Create a new project and set current user as one of the owners. 
++ Request (application/json)
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+    
+    + Body
+    
+            {
+                "title": "校园绿化项目",
+                "tags": [{"name":"School"},{"name":"Cooking"}],
+                "school": "同济大学",
+                "state": "招人中"
+            }
+
++ Response 201
+            
+            {
+                "id": 1,
+                "title": "校园绿化项目",
+                "tags": [{"name":"School"},{"name":"Cooking"}],
+                "school": "同济大学",
+                "state": "招人中",
+                "created_at":"2013-11-16T10:47:57.149Z",
+                "updated_at":"2013-11-16T10:47:57.149Z"
+            }
+
+## Project Collection [/projects/{id}]
+### Get a project's information [GET]
++ Response 200
+    + Body
+
+            {
+                "id": 1,
+                "title": "校园绿化项目",
+                "tags": [{"name":"School"},{"name":"Cooking"}],
+                "school": "同济大学",
+                "state": "招人中",
+                "created_at":"2013-11-16T10:47:57.149Z",
+                "updated_at":"2013-11-16T10:47:57.149Z"
+            } 
+            
+### Update a project's information [PATCH]
+Update project information. All fields in the `Project` model is avaliable.  
+The user should be the one of the owners of the project or he/she will get 401 Error.  
+
++ Request (application/json)
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
+    + Body
+
+            {
+                "title": "校园绿化项目",
+                "tags": [{"name":"School"}],
+                "school": "同济大学",
+                "state": "招人中"
+            }
+
++ Response 200
+
+            {
+                "id": 1,
+                "title": "校园绿化项目",
+                "tags": [{"name":"School"}],
+                "school": "同济大学",
+                "state": "招人中",
+                "created_at":"2013-11-16T10:47:57.149Z",
+                "updated_at":"2013-11-16T10:47:57.149Z"
+            }
+
+### DELETE A PROJECT [DELETE]
+Only owners can delete the project. HTTP 500 when error occurs.
++ Request 
+
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
++ Response 200
+
+
+## User Projects Collection [/users/{id}/project{?offset, count}]
+### Show user's projects [GET]
+Show all projects where the user with specific id has membership in them.   
++ Parameters
+    + offset (required, integer) 
+    + count (required, integer)
++ Response 200
+    
+    + Body
+    
+            [
+            {
+            "id": 4,
+            "title": "一个好项目",
+            "tags": [{"name":"School"}],
+            "school": "同济大学",
+            "state": "招人中",
+            "project_likes_count": 99
+            }
+            ]
+
+
+## Projects Counter [/projects/count]
+### Get the count of all projects [GET]
++ Response 200
+    + Body
+
+            {
+            "count": 4994812
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Group Tags
+## Tags Collection [/tags{?auto_complete_word, count, match}]
+### Get Tags Information [GET]
++ Parameters
+    + auto_complete_word
+    + count
+    + match(optional, integer) ... if `match` is 1, then the word must just match the auto_complete_word
+
++ Response 200
+    + Body
+
+            [ { "created_at" : "2013-11-17T17:07:36.000Z",
+                "id" : 5,
+                "name" : "xx3",
+                "updated_at" : "2013-11-17T17:07:36.000Z"
+              },
+              { "created_at" : "2013-11-17T17:07:38.000Z",
+                "id" : 6,
+                "name" : "xx2",
+                "updated_at" : "2013-11-17T17:07:38.000Z"
+              }
+            ]
+
+
+
+
