@@ -220,14 +220,14 @@ HTTP 401 when unauthorized, HTTP 500 when unknown error.
 
 
 # Group Projects
-## Projects Collection [/projects{?offset,count,tags}]
+## Projects Collection [/projects{?page, tags}]
 ### Get projects list [GET]
-Get projects information, given an offset value and count.  
+Get projects information.
+per_page: 15  
 
 + Parameters
-    + offset(required, integer) ... offset position
-    + count(required, integer) ... count of items wanted
     + tag(comma splited string) ... tag name
+    + page(required, integer) ... page
 
 + Response 200 (application/json)
     + Body 
@@ -340,12 +340,12 @@ Only owners can delete the project. HTTP 500 when error occurs.
 + Response 200
 
 
-## User Projects Collection [/users/{id}/project{?offset, count}]
+## User Projects Collection [/users/{id}/project{?page}]
 ### Show user's projects [GET]
 Show all projects where the user with specific id has membership in them.   
 + Parameters
-    + offset (required, integer) 
-    + count (required, integer)
+    + page (required, integer) ... page
+
 + Response 200
     
     + Body
@@ -383,7 +383,7 @@ auth
             AUTH_EMAIL : webmaster@leapoahead.com
 
     + Body
-    
+
             {}
 
 + Response 201
@@ -411,6 +411,7 @@ Returns a single field `state`, `state = 0` states the user hasn't liked the pro
             {
                 state: 0
             }
+
 
 
 
