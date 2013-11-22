@@ -364,6 +364,7 @@ Show all projects where the user with specific id has membership in them.
 
 ## Projects Counter [/projects/count]
 ### Get the count of all projects [GET]
+auth
 + Response 200
     + Body
 
@@ -373,8 +374,43 @@ Show all projects where the user with specific id has membership in them.
 
 
 
+## Project Like [/projects/{id}/likes]
+### Like the project [POST]
++ Request 
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
 
+    + Body
+    
+            {}
 
++ Response 201
+
+### Dislike the project [DELETE]
++ Request 
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
++ Response 200
+
+### Check whether the user can like the project (get the state of user like) [GET]
+Returns a single field `state`, `state = 0` states the user hasn't liked the project, `state = 1` otherwise.
++ Request 
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
++ Response 200
+    + Body
+
+            {
+                state: 0
+            }
 
 
 
