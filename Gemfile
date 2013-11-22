@@ -18,6 +18,7 @@ gem 'mysql2'
 
 # Use unicorn as the app server
 gem 'unicorn'
+gem 'unicorn-rails'
 
 # Deploy with Capistrano
 # gem 'capistrano', :group => :development
