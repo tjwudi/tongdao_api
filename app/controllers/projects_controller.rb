@@ -21,6 +21,8 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    project_json = Project.find(params[:id])
+
     return render json: Project.find(params[:id])
   end
 

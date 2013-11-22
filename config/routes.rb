@@ -14,15 +14,24 @@ TongdaoApi::Application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   
+  ########################################################
+  # Counters
   get 'pending_users/count' => 'pending_users#count'
   get 'users/count' => 'users#count'
   # get 'observe_entries/count' => 'observe_entries#count'
   get 'projects/count' => 'projects#count'
 
+  #######################################################
+  # Dislike actions
+  delete 'projects/:id/likes' => 'likes#destroy'
+
+
   resources :users, :only => [:create, :update, :index] do
     resources :projects, :only => [:index]
   end
-  resources :projects, :only => [:index, :show, :create, :destroy, :update]
+  resources :projects, :only => [:index, :show, :create, :destroy, :update] do 
+    resources :likes, :only => [:create, :index]
+  end
   resources :pending_users, :only => [:create, :destroy]
   resources :sessions, :only => [:create, :destroy]
   # resources :observe_entries, :only => [:index, :show, :create, :destroy, :update]
