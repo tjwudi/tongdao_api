@@ -17,3 +17,6 @@
 
 # Ignore all shell scripts
 /sh/*.sh
+
+# Ignore database configuration
+database.yml
