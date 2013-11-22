@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  acts_as_likeable
+
   has_many :memberships
   has_many :users, through: :memberships, source: :user
 

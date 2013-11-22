@@ -60,6 +60,8 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.1.0)
+    socialization (1.0.0)
+      activerecord
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -85,3 +87,4 @@ DEPENDENCIES
   mysql2
   rails (= 4.0.1)
   rails-api
+  socialization
