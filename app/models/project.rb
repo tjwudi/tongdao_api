@@ -1,13 +1,19 @@
 class Project < ActiveRecord::Base
+  # Can be liked by User
   acts_as_likeable
+
+  # Pagination 
+  def self.per_page
+    return 15
+  end
 
   has_many :memberships
   has_many :users, through: :memberships, source: :user
 
   has_many :project_comments
 
-  has_many :project_likes
-  has_many :liked_users, through: :project_likes, source: :user
+  has_many :tag_attachments
+  has_many :tags, through: :tag_attachments, source: :tag
 
   has_many :project_posts
 

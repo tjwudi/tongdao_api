@@ -3,18 +3,16 @@ class ProjectsController < ApplicationController
   before_action :owner_auth, :only => [:destroy, :update]
 
 
-  def index
-    return render_blank(500) unless params.include?(:offset) && params.include?(:count)
-    
+  def index 
     if params.include?(:tag)
       # view by tag
-      projects = Tag.find_by(name: params["tag"]).projects.offset(params[:offset]).limit(params[:count]).order("id desc")
+      projects = Tag.find_by(name: params["tag"]).projects.page(params[:page]).order("id desc")
     elsif params.include?(:user_id)
       # view by user 
-      projects = User.find(params[:user_id]).projects.offset(params[:offset]).limit(params[:count]).order("id desc")
+      projects = User.find(params[:user_id]).projects.page(params[:page]).order("id desc")
     else
       # view all
-      projects = Project.offset(params[:offset]).limit(params[:count]).order("id desc")
+      projects = Project.page(params[:page]).order("id desc")
     end
 
     return render json: projects

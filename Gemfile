@@ -25,4 +25,8 @@ gem 'mysql2'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+# Like/Follow/Mention
 gem 'socialization'
+
+# Pagination
+gem 'will_paginate', '~> 3.0.5'
