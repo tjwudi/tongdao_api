@@ -165,6 +165,12 @@ Returns a json object which owns a `count` field.
 
 
 
+
+
+
+
+
+
 # Group Sessions
 ## Sessions Collection [/sessions]
 ### Create a new session [POST]
@@ -204,6 +210,10 @@ HTTP 401 when unauthorized, HTTP 500 when unknown error.
     + Body
 
             []
+
+
+
+
 
 
 
@@ -374,7 +384,7 @@ auth
 
 
 
-## Project Like [/projects/{id}/likes]
+## Project Like [/projects/{id}/like]
 ### Like the project [POST]
 + Request 
     + Headers
@@ -388,6 +398,7 @@ auth
 
 + Response 201
 
+## Project Like [/projects/{id}/dislike]
 ### Dislike the project [DELETE]
 + Request 
     + Headers
@@ -397,8 +408,9 @@ auth
 
 + Response 200
 
+## Project Like [/projects/{id}/can_like]
 ### Check whether the user can like the project (get the state of user like) [GET]
-Returns a single field `state`, `state = 0` states the user hasn't liked the project, `state = 1` otherwise.
+Returns a single field `state`, `state = 1` states the user can like the project (hasn't been liked yet!), `state = 0` otherwise.
 + Request 
     + Headers
     
