@@ -11,12 +11,6 @@ class User < ActiveRecord::Base
   has_many :project_likes
   has_many :liked_projects, through: :project_likes, source: :project
 
-  has_many :stickers
-
-  has_many :stickers_users
-  has_many :related_stickers, through: :stickers_users, source: :sticker
-
-
 
   def self.authorize(email, encrypted_password)
     user = User.find_by email: email, encrypted_password: encrypted_password

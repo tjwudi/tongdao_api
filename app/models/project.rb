@@ -17,10 +17,6 @@ class Project < ActiveRecord::Base
 
   has_many :project_posts
 
-  has_many :stickers
-
-  has_many :boxes
-
   validates :title, presence: true
   validates :school, presence: true
   validates :state, presence: true

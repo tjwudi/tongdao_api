@@ -13,25 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20131122041010) do
 
-  create_table "boxes", force: true do |t|
-    t.integer  "project_id"
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "boxes", ["project_id"], name: "index_boxes_on_project_id", using: :btree
-
-  create_table "boxes_stickers", force: true do |t|
-    t.integer  "sticker_id"
-    t.integer  "box_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "boxes_stickers", ["box_id"], name: "index_boxes_stickers_on_box_id", using: :btree
-  add_index "boxes_stickers", ["sticker_id"], name: "index_boxes_stickers_on_sticker_id", using: :btree
-
   create_table "follows", force: true do |t|
     t.string   "follower_type"
     t.integer  "follower_id"
@@ -122,28 +103,6 @@ ActiveRecord::Schema.define(version: 20131122041010) do
   add_index "projects", ["category"], name: "index_projects_on_category", using: :btree
   add_index "projects", ["school"], name: "index_projects_on_school", using: :btree
   add_index "projects", ["title"], name: "index_projects_on_title", using: :btree
-
-  create_table "stickers", force: true do |t|
-    t.integer  "project_id"
-    t.integer  "user_id"
-    t.text     "content"
-    t.boolean  "requires_feedback"
-    t.string   "files"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "stickers", ["project_id"], name: "index_stickers_on_project_id", using: :btree
-  add_index "stickers", ["user_id"], name: "index_stickers_on_user_id", using: :btree
-
-  create_table "stickers_users", force: true do |t|
-    t.integer  "sticker_id"
-    t.boolean  "read"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "stickers_users", ["sticker_id"], name: "index_stickers_users_on_sticker_id", using: :btree
 
   create_table "tag_attachments", force: true do |t|
     t.integer  "tag_id"
