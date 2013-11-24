@@ -14,7 +14,6 @@ class ApplicationController < ActionController::API
 
   ##################################################
   # Global error hanlder registers
-  rescue_from StandardError with :rescue_global
   rescue_from ActiveRecord::RecordNotFound, with: :rescue_not_found
 
 
