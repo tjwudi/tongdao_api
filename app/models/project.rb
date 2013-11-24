@@ -7,15 +7,15 @@ class Project < ActiveRecord::Base
     return 15
   end
 
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships, source: :user
 
-  has_many :project_comments
+  has_many :project_comments, dependent: :destroy
 
-  has_many :tag_attachments
+  has_many :tag_attachments, dependent: :destroy
   has_many :tags, through: :tag_attachments, source: :tag
 
-  has_many :project_posts
+  has_many :project_posts, dependent: :destroy
 
   validates :title, presence: true
   validates :school, presence: true

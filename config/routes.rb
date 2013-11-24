@@ -21,6 +21,15 @@ TongdaoApi::Application.routes.draw do
     collection do
       get 'count'
     end
+
+    member do
+      post 'follow'
+      delete 'unfollow'
+      get 'can_follow'
+      get 'followed_me'
+      get 'followers'
+      get 'following'
+    end
   end
 
   resources :projects do

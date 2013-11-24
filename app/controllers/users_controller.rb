@@ -39,4 +39,22 @@ class UsersController < ApplicationController
   def count
     return render json: { count: User.all.count }, status: 200
   end
+
+  def follow
+  end
+
+  def unfollow
+  end
+
+  def can_follow
+  end
+
+  def followed_me
+  end
+
+  def followers
+  end
+
+  def following
+  end
 end
