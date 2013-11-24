@@ -8,14 +8,16 @@ class UsersController < ApplicationController
 
   def create
     begin
-      user = User.create(params.permit(:nickname, :email, :encrypted_password))
+      user = User.new(params.permit(:nickname, :email, :encrypted_password))
+      user.generate_authentication_token
+      user.save
+      user.reload
     rescue
       p "user creation failed"
       render_blank(500)
       return
     end
-    token = Token.new_for(user)
-    return render :json => token, status: 201
+    return render json: user, only: [:auth_token, :id]
   end
 
   def update

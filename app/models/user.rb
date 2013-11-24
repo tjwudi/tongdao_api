@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   end
 
   def generate_authentication_token
-    unless Rails.env.production?
+    if Rails.env.production?
       self.auth_token = SecureRandom.hex(32)
     else
       self.auth_token = "theusertoken"
