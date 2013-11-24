@@ -97,9 +97,8 @@ HTTP 500 when error occurs (like duplication in `nickname` field)
             "count": 402000
             }
 
-## User follow [/users/{id}/follow]
-### Like a user [POST]
-**NOT IMPLEMENTED**
+## User follow [/users/{id}/toggle_follow]
+### Follow/unfollow a user [POST]
 + Request (application/json)
     + Headers
     
@@ -107,78 +106,22 @@ HTTP 500 when error occurs (like duplication in `nickname` field)
             AUTH_EMAIL : webmaster@leapoahead.com
 
     + Body
-    
             {}
 
 + Response 200
 
-## User unfollow [/users/{id}/unfollow]
-### Unfollow a user [DELETE]
-**NOT IMPLEMENTED**
-+ Request 
-    + Headers
-    
-            AUTH_TOKEN : theusertoken
-            AUTH_EMAIL : webmaster@leapoahead.com
-    
-+ Response 200
 
 ## User followship status [/users/{id}/followship]
 ### Get the follow ship [GET]
-**NOT IMPLEMENTED**
 returns a single field `status`.  
-when `status = 0` means the current user followed the user with {id}, when `status = 1` means the user with {id} followed the current user, when `status = 2` means they followed each other.
-when the user {id} is current user itself, `status = 3`
+when `status = 0` mean they don't follow each other neither, when `status = 1` means the current user followed the user with {id}, when `status = 2` means the user with {id} followed the current user, when `status = 3` means they followed each other.
+when the user {id} is current user itself, return HTTP 500 error.
 
 + Response 200
-
     + Body
-    
             {
                 status = 2
             }
-
-## User followers collection [/users/{id}/followers{?page}]
-### Get the followers list [GET]
-**NOT IMPLEMENTED**
-+ Parameters
-    + page (optional, integer) ... page
-
-+ Response 200
-
-    + Body
-    
-            [
-            {
-            "nickname": "wooo",
-            "avatar": "http://img.tongdao.in/avatar/20132.jpg",
-            "school": "同济大学",
-            "speciality": "编程，音乐",
-            "gender": "男",
-            "id": 8
-            }
-            ]
-
-## User following collection [/users/{id}/followings{?page}]
-### Get the user list the current user follows [GET]
-**NOT IMPLEMENTED**
-+ Parameters
-    + page (optional, integer) ... page
-
-+ Response 200
-
-    + Body
-    
-            [
-            {
-            "nickname": "wooo",
-            "avatar": "http://img.tongdao.in/avatar/20132.jpg",
-            "school": "同济大学",
-            "speciality": "编程，音乐",
-            "gender": "男",
-            "id": 8
-            }
-            ]
 
 
 
@@ -468,8 +411,8 @@ auth
 
 
 
-## Project Like [/projects/{id}/like]
-### Like the project [POST]
+## Project Like [/projects/{id}/toggle_like]
+### Like/Dislike the project [POST]
 + Request 
     + Headers
     
@@ -480,19 +423,10 @@ auth
 
             {}
 
-+ Response 201
-
-## Project Dislike [/projects/{id}/dislike]
-### Dislike the project [DELETE]
-+ Request 
-    + Headers
-    
-            AUTH_TOKEN : theusertoken
-            AUTH_EMAIL : webmaster@leapoahead.com
-
 + Response 200
 
-## Project Like Status Check [/projects/{id}/can_like]
+
+## Project Like Status Check [/projects/{id}/status_like]
 ### Check whether the user can like the project (get the state of user like) [GET]
 Returns a single field `state`, `state = 1` states the user can like the project (hasn't been liked yet!), `state = 0` otherwise.
 + Request 
