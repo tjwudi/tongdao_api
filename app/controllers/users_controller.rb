@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     begin
       user = User.new(params.permit(:nickname, :email, :encrypted_password))
       user.generate_authentication_token
+      user.last_auth_time=DateTime.now
       user.save
       user.reload
     rescue
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
 
   def toggle_follow
     current_user.toggle_follow!(User.find(params[:id]))
-    render_blank(201)
+    render_blank(200)
   end
 
   def followship
