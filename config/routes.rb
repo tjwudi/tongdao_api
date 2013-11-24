@@ -23,12 +23,10 @@ TongdaoApi::Application.routes.draw do
     end
 
     member do
-      post 'follow'
-      delete 'unfollow'
-      get 'can_follow'
-      get 'followed_me'
+      post 'toggle_follow'
+      get 'followship'
       get 'followers'
-      get 'following'
+      get 'followings'
     end
   end
 
@@ -38,9 +36,8 @@ TongdaoApi::Application.routes.draw do
     end
 
     member do
-      post 'like' => 'project_likes#create'
-      delete 'dislike' => 'project_likes#destroy'
-      get 'can_like' => 'project_likes#index'
+      post 'toggle_like' 
+      get 'status_like'
     end
   end
 

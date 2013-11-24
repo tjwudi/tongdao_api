@@ -40,21 +40,31 @@ class UsersController < ApplicationController
     return render json: { count: User.all.count }, status: 200
   end
 
-  def follow
+  def toggle_follow
+    current_user.toggle_follow!(User.find(params[:id]))
+    render_blank(201)
   end
 
-  def unfollow
+  def followship
+    current_user_cache = current_user
+    target_user = User.find(params[:id])
+    render_blank(500) if current_user_cache.id == target_user.id
+
+    result = { status: 0 }
+    b_followed = target_user.follows?(current_user_cache)
+    b_following = current_user_cache.follows?(target_user)
+    
+    if b_followed && b_following
+      result[:status] = 3
+    elsif b_followed && !b_following
+      result[:status] = 2
+    elsif !b_followed && b_following
+      result[:status] = 1
+    else
+      result[:status] = 0
+    end
+      
+    render json: result
   end
 
-  def can_follow
-  end
-
-  def followed_me
-  end
-
-  def followers
-  end
-
-  def following
-  end
 end
