@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       user.last_login_time = DateTime.now
       return render json: user, type: :auth_token_only
     else
-      return render_blank(500)
+      return render_blank(403)
     end
   end
 
