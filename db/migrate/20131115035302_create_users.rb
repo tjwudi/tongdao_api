@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :gender
       t.string :contact
       t.string :school
+      t.string :major
       t.string :speciality
       t.string :experence
       t.string :avatar

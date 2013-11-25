@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 20131122041010) do
     t.string   "gender"
     t.string   "contact"
     t.string   "school"
+    t.string   "major"
     t.string   "speciality"
     t.string   "experence"
     t.string   "avatar"
