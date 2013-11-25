@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def index 
     return render_blank(500) unless params.include?(:auto_complete_word) && params.include?(:count)
-    return render json: User.select("nickname, avatar, school, speciality, gender, id").where("nickname LIKE '%#{params[:auto_complete_word]}%'").limit(params[:count]), status: 200
+    return render json: User.where("nickname LIKE '%#{params[:auto_complete_word]}%'").limit(params[:count]).as_json, status: 200
   end
 
   def create
@@ -29,13 +29,13 @@ class UsersController < ApplicationController
     current_user_cache.school = params[:school] if params.include? :school
     current_user_cache.speciality = params[:speciality] if params.include? :speciality
     current_user_cache.avatar = params[:avatar] if params.include? :avatar
-    current_user_cache.experences = params[:experences] if params.include? :experences
+    current_user_cache.experence = params[:experence] if params.include? :experence
     current_user_cache.major = params[:major] if params.include? :major
     
 
     begin
       current_user_cache.save
-      return render_blank(200)
+      return render json: current_user_cache.as_json
     rescue
       p "unable to update user information"
       return render_blank(500)

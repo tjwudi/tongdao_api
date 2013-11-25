@@ -56,5 +56,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  def as_json(options={})
+    super({:except => [:encrypted_password, :contact]});
+  end
+
 
 end
