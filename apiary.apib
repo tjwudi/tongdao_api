@@ -33,7 +33,7 @@ This API only works for project member invitation page.
             "gender": "男",
             "id": 8,
             "email": "webmaster@leapoahead.com"
-            }
+            } 
             ]
 
 ### Create a User [POST]
@@ -49,7 +49,7 @@ Duplicated records error will be shown as 500 error, too. In this case, `email` 
             "encrypted_password" : "abcabc"
             }
 
-+ Response 201 (application/json)
++ Response 200 (application/json)
     + Body 
     
             {
@@ -102,7 +102,7 @@ HTTP 500 when error occurs (like duplication in `nickname` field)
             "gender": "男",
             "id": 8,
             "email": "webmaster@leapoahead.com"
-            }POS
+            }
 
 ## Users Counter Collection [/users/count]
 ### Get the count of all users [GET]
@@ -172,15 +172,9 @@ If any error occurs (duplicated email field), response it with HTTP 500 error.
             "updated_at":"2013-11-16T10:47:57.149Z"
             }
 
+## Pending user collection [/pending_users/{id}]
 ### Delete a pending user [DELETE]
 Just ... Destroy it. Returns HTTP 500 when failed.
-
-+ Request (application/json)
-    + Body
-
-            {
-            "id": 1
-            }
 
 + Response 200 (application/json)
     + Body
@@ -236,7 +230,7 @@ HTTP 401 for failed email&password pair.
             "encrypted_password": "abcabc"
             }
 
-+ Response 201 (application/json)
++ Response 200 (application/json)
     + Body
 
             {
