@@ -12,6 +12,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :experence
       t.string :avatar
       t.string :auth_token
+      t.integer :count_of_followers, default: 0, null: false
+      t.integer :count_of_followings, default: 0, null: false
       t.timestamp :last_auth_time
       t.timestamp :last_login_time
 

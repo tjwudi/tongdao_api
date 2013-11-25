@@ -23,6 +23,26 @@ class User < ActiveRecord::Base
     end
   end
 
+  # follow a user
+  def follow_user!(user = nil)
+    return false if user.nil?
+    self.follow!(user)
+    self.count_of_followings = self.count_of_followings + 1
+    user.count_of_followers = user.count_of_followers + 1
+    user.save
+    self.save
+  end
+
+  # unfollow a user
+  def unfollow_user!(user = nil)
+    return false if user.nil?
+    self.unfollow!(user)
+    self.count_of_followings = self.count_of_followings - 1
+    user.count_of_followers = user.count_of_followers - 1
+    user.save
+    self.save
+  end
+
   def deauthorize
     self.auth_token = nil
     self.save

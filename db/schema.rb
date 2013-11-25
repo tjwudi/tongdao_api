@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20131122041010) do
     t.string   "state"
     t.text     "summary"
     t.string   "feature_photo"
-    t.integer  "count_of_project_likes", default: 0, null: false
+    t.integer  "count_of_likes", default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -124,9 +124,9 @@ ActiveRecord::Schema.define(version: 20131122041010) do
   add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",              null: false
-    t.string   "encrypted_password", null: false
-    t.string   "nickname",           null: false
+    t.string   "email",                           null: false
+    t.string   "encrypted_password",              null: false
+    t.string   "nickname",                        null: false
     t.string   "gender"
     t.string   "contact"
     t.string   "school"
@@ -135,6 +135,8 @@ ActiveRecord::Schema.define(version: 20131122041010) do
     t.string   "experence"
     t.string   "avatar"
     t.string   "auth_token"
+    t.integer  "count_of_followers",  default: 0, null: false
+    t.integer  "count_of_followings", default: 0, null: false
     t.datetime "last_auth_time"
     t.datetime "last_login_time"
     t.datetime "created_at"

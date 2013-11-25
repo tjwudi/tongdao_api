@@ -44,7 +44,14 @@ class UsersController < ApplicationController
   end
 
   def toggle_follow
-    current_user.toggle_follow!(User.find(params[:id]))
+    current_user_cache = current_user
+    target_user = User.find(params[:id])
+
+    if current_user_cache.follows?(target_user) 
+      current_user_cache.unfollow_user!(target_user)
+    else
+      current_user_cache.follow_user!(target_user)
+    end
     render_blank(200)
   end
 
