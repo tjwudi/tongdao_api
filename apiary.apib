@@ -28,8 +28,11 @@ This API only works for project member invitation page.
             "avatar": "http://img.tongdao.in/avatar/20132.jpg",
             "school": "同济大学",
             "speciality": "编程，音乐",
+            "experence": "XXX",
+            "major": "XXX",
             "gender": "男",
-            "id": 8
+            "id": 8,
+            "email": "webmaster@leapoahead.com"
             }
             ]
 
@@ -89,7 +92,17 @@ HTTP 500 when error occurs (like duplication in `nickname` field)
 + Response 200
     + Body
 
-            []
+            {
+            "nickname": "wooo",
+            "avatar": "http://img.tongdao.in/avatar/20132.jpg",
+            "school": "同济大学",
+            "speciality": "编程，音乐",
+            "experence": "XXX",
+            "major": "XXX",
+            "gender": "男",
+            "id": 8,
+            "email": "webmaster@leapoahead.com"
+            }POS
 
 ## Users Counter Collection [/users/count]
 ### Get the count of all users [GET]
