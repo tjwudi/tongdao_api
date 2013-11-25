@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :contact
       t.string :school
       t.string :speciality
+      t.string :experence
       t.string :avatar
       t.string :auth_token
       t.timestamp :last_auth_time
