@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     user = User.authorize(params[:email], params[:encrypted_password])
     if user
       user.last_login_time = DateTime.now
-      return render json: user, only: [:auth_token, :id]
+      return render json: user, type: :auth_token_only
     else
       return render_blank(500)
     end

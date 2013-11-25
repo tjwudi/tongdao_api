@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def index 
     return render_blank(500) unless params.include?(:auto_complete_word) && params.include?(:count)
-    return render json: User.where("nickname LIKE '%#{params[:auto_complete_word]}%'").limit(params[:count]).as_json, status: 200
+    return render json: User.where("nickname LIKE '%#{params[:auto_complete_word]}%'").limit(params[:count]).as_json
   end
 
   def create
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       render_blank(500)
       return
     end
-    return render json: user, only: [:auth_token, :id], status: 201
+    return render json: user, type: :auth_token_only
   end
 
   def update
