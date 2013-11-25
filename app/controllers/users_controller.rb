@@ -18,20 +18,23 @@ class UsersController < ApplicationController
       render_blank(500)
       return
     end
-    return render json: user, only: [:auth_token, :id]
+    return render json: user, only: [:auth_token, :id], status: 201
   end
 
   def update
-    current_user.nickname = params[:nickname] if params.include? :nickname
-    current_user.gender = params[:gender] if params.include? :gender
-    current_user.contact = params[:contact] if params.include? :contact
-    current_user.school = params[:school] if params.include? :school
-    current_user.speciality = params[:speciality] if params.include? :speciality
-    current_user.avatar = params[:avatar] if params.include? :avatar
-    current_user.encrypted_password = params[:encrypted_password] if params.include? :encrypted_password
+    current_user_cache = current_user
+    current_user_cache.nickname = params[:nickname] if params.include? :nickname
+    current_user_cache.gender = params[:gender] if params.include? :gender
+    current_user_cache.contact = params[:contact] if params.include? :contact
+    current_user_cache.school = params[:school] if params.include? :school
+    current_user_cache.speciality = params[:speciality] if params.include? :speciality
+    current_user_cache.avatar = params[:avatar] if params.include? :avatar
+    current_user_cache.experences = params[:experences] if params.include? :experences
+    current_user_cache.major = params[:major] if params.include? :major
+    
 
     begin
-      current_user.save
+      current_user_cache.save
       return render_blank(200)
     rescue
       p "unable to update user information"

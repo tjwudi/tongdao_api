@@ -50,6 +50,7 @@ class ApplicationController < ActionController::API
     Rails.logger.info "  [HTTP_HOST] #{request.headers['HTTP_HOST'].inspect}"
     Rails.logger.info "  [HTTP_USER_AGENT] #{request.headers['HTTP_USER_AGENT'].inspect}"
     Rails.logger.info "  [HTTP_AUTH_TOKEN] #{request.headers['HTTP_AUTH_TOKEN'].inspect}"
+    Rails.logger.info "  [HTTP_AUTH_EMAIL] #{request.headers['HTTP_AUTH_EMAIL'].inspect}"
   end
 
 
