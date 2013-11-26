@@ -115,6 +115,7 @@ HTTP 500 when error occurs (like duplication in `nickname` field)
 
 ## User follow [/users/{id}/toggle_follow]
 ### Follow/unfollow a user [POST]
+Returns a status code (see Get the follow ship [GET] below)
 + Request (application/json)
     + Headers
     
@@ -123,7 +124,9 @@ HTTP 500 when error occurs (like duplication in `nickname` field)
 
     + Body
     
-            {}
+            {
+                "state": 2
+            }
 
 + Response 200
 
@@ -144,7 +147,7 @@ when the user {id} is current user itself, return HTTP 500 error.
     + Body
     
             {
-                status = 2
+                "state": 2
             }
 
 
@@ -431,6 +434,7 @@ auth
 
 ## Project Like [/projects/{id}/toggle_like]
 ### Like/Dislike the project [POST]
+Returns a status code (see the section below).
 + Request 
     + Headers
     
@@ -439,12 +443,14 @@ auth
 
     + Body
 
-            {}
+            {
+                state: 1
+            }
 
 + Response 200
 
 
-## Project Like Status Check [/projects/{id}/status_like]
+## Project Like Status Check [/projects/{id}/state_like]
 ### Check whether the user can like the project (get the state of user like) [GET]
 Returns a single field `state`, `state = 1` states the user can like the project (hasn't been liked yet!), `state = 0` otherwise.
 + Request 
