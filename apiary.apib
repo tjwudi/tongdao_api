@@ -278,7 +278,7 @@ HTTP 401 when unauthorized, HTTP 500 when unknown error.
 
 
 # Group Projects
-## Projects Collection [/projects{?page, tags, sort_by}]
+## Projects Collection [/projects{?page, tags, per_page}]
 ### Get projects list [GET]
 Get projects information.
 per_page: 15  
@@ -409,7 +409,7 @@ Only owners can delete the project. HTTP 500 when error occurs.
 + Response 200
 
 
-## User Projects Collection [/users/{id}/projects{?page}]
+## User Projects Collection [/users/{id}/projects{?page, per_page}]
 ### Show user's projects [GET]
 Show all projects where the user with specific id has membership in them.   
 + Parameters
