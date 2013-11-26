@@ -31,9 +31,10 @@ class ProjectsController < ApplicationController
         project.destroy           # rollback
         return render_blank(500)
       end
-      params[:tags].each do |tagname|
-        option = { name: tagname[:name].downcase }
-        tag = Tag.find_by(option)
+      p params[:tags]
+      params[:tags].each do |key, tagname|
+        option = { name: tagname['name'].downcase }
+        tag = Tag.find_by(name: option[:name])
         tag = Tag.create(option) if tag.nil?
         project.tags << tag
         tag.save
@@ -68,7 +69,7 @@ class ProjectsController < ApplicationController
       project.tags.clear
       render_blank(500) unless params[:tags].length > 0
 
-      params[:tags].each do |tagname|
+      params[:tags].each do |key, tagname|
         option = { name: tagname[:name].downcase }
         tag = Tag.find_by(option)
         tag = Tag.create(option) if tag.nil?

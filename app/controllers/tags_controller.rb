@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class TagsController < ApplicationController
   skip_before_action :authenticate, only: [:index]
 

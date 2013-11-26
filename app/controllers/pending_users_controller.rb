@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PendingUsersController < ApplicationController
   skip_before_action :authenticate, only: [:create, :count, :destroy]
 

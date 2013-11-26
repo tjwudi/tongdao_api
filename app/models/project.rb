@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Project < ActiveRecord::Base
   # Can be liked by User
   acts_as_likeable

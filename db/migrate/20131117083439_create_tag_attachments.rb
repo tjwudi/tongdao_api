@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateTagAttachments < ActiveRecord::Migration
   def change
     create_table :tag_attachments do |t|

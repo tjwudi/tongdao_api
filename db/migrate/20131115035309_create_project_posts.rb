@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateProjectPosts < ActiveRecord::Migration
   def change
     create_table :project_posts do |t|

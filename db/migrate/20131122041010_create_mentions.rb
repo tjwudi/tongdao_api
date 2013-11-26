@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateMentions < ActiveRecord::Migration
   def change
     create_table :mentions do |t|

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ProjectLikesController < ApplicationController
   def toggle_like
     current_user.toggle_like!(Project.find(params[:id]))
