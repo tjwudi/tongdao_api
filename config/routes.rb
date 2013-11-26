@@ -37,8 +37,8 @@ TongdaoApi::Application.routes.draw do
     end
 
     member do
-      post 'toggle_like' 
-      get 'status_like'
+      post 'toggle_like' => 'project_likes#toggle_like'
+      get 'state_like'   => 'project_likes#state_like'
     end
   end
 

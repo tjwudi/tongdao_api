@@ -56,29 +56,35 @@ class UsersController < ApplicationController
     else
       current_user_cache.follow_user!(target_user)
     end
-    render_blank(200)
+    
+    render json: get_followship(current_user_cache, target_user)
   end
 
   def followship
     current_user_cache = current_user
     target_user = User.find(params[:id])
-    render_blank(500) if current_user_cache.id == target_user.id
+  
+    render json: get_followship(current_user_cache, target_user)
+  end
 
-    result = { status: 0 }
+  private
+
+  def get_followship(current_user_cache, target_user)
+    result = {}
+
     b_followed = target_user.follows?(current_user_cache)
     b_following = current_user_cache.follows?(target_user)
     
     if b_followed && b_following
-      result[:status] = 3
+      result[:state] = 3
     elsif b_followed && !b_following
-      result[:status] = 2
+      result[:state] = 2
     elsif !b_followed && b_following
-      result[:status] = 1
+      result[:state] = 1
     else
-      result[:status] = 0
+      result[:state] = 0
     end
-      
-    render json: result
+    return result
   end
 
 end
