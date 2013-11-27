@@ -4,24 +4,29 @@ class ProjectsController < ApplicationController
 
 
   def index 
+  
     if params.include?(:tag)
       # view by tag
-      projects = Tag.find_by(name: params["tag"]).projects.page(params[:page]).order("id desc")
+      projects = Tag.find_by(name: params["tag"]).projects.order("id desc").page(params[:page])
     elsif params.include?(:user_id)
       # view by user 
-      projects = User.find(params[:user_id]).projects.page(params[:page]).order("id desc")
+      projects = User.find(params[:user_id]).projects.order("id desc").page(params[:page])
     else
       # view all
-      projects = Project.page(params[:page]).order("id desc")
+      projects = Project.order("id desc").page(params[:page])
     end
+
+    projects = projects.per_page(params[:per_page].to_i) if params.include?(:per_page)
 
     return render json: projects
   end
 
   def show
-    project_json = Project.find(params[:id])
+    project = Project.find(params[:id])
+    project.count_of_views = project.count_of_views + 1
+    project.save
 
-    return render json: Project.find(params[:id])
+    return render json: project
   end
 
   def create

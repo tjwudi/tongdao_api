@@ -49,7 +49,7 @@ TongdaoApi::Application.routes.draw do
   end
 
   resources :sessions, :only => [:create, :destroy]
-  resources :tags, :only => [:index, :create] 
+  resources :tags, :only => [:index] 
 
   root 'application#not_found'
 

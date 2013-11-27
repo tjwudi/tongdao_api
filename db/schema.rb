@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20131122041010) do
     t.string   "state"
     t.text     "summary"
     t.string   "feature_photo"
+    t.integer  "count_of_views", default: 0, null: false
     t.integer  "count_of_likes", default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
