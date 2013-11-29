@@ -632,6 +632,11 @@ Returns a single field `state`, `state = 1` states the user can like the project
 
 
 
+# Group Project Posts 
+## Project Posts Collection
+
+
+
 
 
 
@@ -645,8 +650,11 @@ Returns a single field `state`, `state = 1` states the user can like the project
 
 
 # Group Public Acitivites
-## User followings' public activities collection [/public_activities{?page}]
+## User followings public activities collection [/public_activities{?page}]
 ### Get public activities [GET]
++ Parameters 
+    + page(optional, string)
+
 + Request 
     + Headers
     
@@ -669,4 +677,31 @@ Returns a single field `state`, `state = 1` states the user can like the project
               "created_at": "2013-11-29T15:34:35.000Z",
               "updated_at": "2013-11-29T15:34:43.000Z"
             }]
-            
+
+## User Public Activities collection [/users/{id}/public_activities{?page}]
+### Get user's public activities [GET]
++ Parameters 
+    + page(optional, string)
+
++ Request 
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
++ Response 200
+    + Body
+
+            [{
+              "id": 2,
+              "user_id": 3,
+              "data": "fuck~~~",
+              "created_at": "2013-11-29T15:34:56.000Z",
+              "updated_at": "2013-11-29T15:35:07.000Z"
+            }, {
+              "id": 1,
+              "user_id": 2,
+              "data": "hahahaha",
+              "created_at": "2013-11-29T15:34:35.000Z",
+              "updated_at": "2013-11-29T15:34:43.000Z"
+            }]
