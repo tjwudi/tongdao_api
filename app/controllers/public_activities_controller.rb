@@ -10,4 +10,10 @@ class PublicActivitiesController < ApplicationController
 
     render json: @public_activities
   end
+
+  def user_public_activities
+    @public_activities = PublicActivity.where(:user_id => params[:id]).order('id desc').page(params[:page])
+
+    render json: @public_activities
+  end
 end

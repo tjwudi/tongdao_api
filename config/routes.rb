@@ -30,6 +30,7 @@ TongdaoApi::Application.routes.draw do
       get 'followship'
       get 'followers'
       get 'followings'
+      get 'public_activities' => 'public_activities#user_public_activities'
     end
   end
 
