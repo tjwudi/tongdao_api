@@ -24,16 +24,22 @@ This API only works for project member invitation page.
     
             [
             {
-            "nickname": "wooo",
-            "avatar": "http://img.tongdao.in/avatar/20132.jpg",
-            "school": "同济大学",
-            "speciality": "编程，音乐",
-            "experence": "XXX",
-            "major": "XXX",
-            "gender": "男",
-            "id": 8,
-            "email": "webmaster@leapoahead.com"
-            } 
+            "id": 2,
+            "email": "lifeisgood@leapoahead.com",
+            "nickname": "Sherry",
+            "gender": null,
+            "school": null,
+            "major": null,
+            "speciality": null,
+            "experence": null,
+            "avatar": null,
+            "count_of_followers": 1,
+            "count_of_followings": 0,
+            "last_auth_time": "2013-11-29T14:20:48.000Z",
+            "last_login_time": "2013-11-29T14:20:48.000Z",
+            "created_at": "2013-11-29T14:20:48.000Z",
+            "updated_at": "2013-11-29T14:20:57.000Z"
+            }
             ]
 
 ### Create a User [POST]
@@ -93,15 +99,21 @@ HTTP 500 when error occurs (like duplication in `nickname` field)
     + Body
 
             {
-            "nickname": "wooo",
-            "avatar": "http://img.tongdao.in/avatar/20132.jpg",
-            "school": "同济大学",
-            "speciality": "编程，音乐",
-            "experence": "XXX",
-            "major": "XXX",
-            "gender": "男",
-            "id": 8,
-            "email": "webmaster@leapoahead.com"
+            "id": 2,
+            "email": "lifeisgood@leapoahead.com",
+            "nickname": "Sherry",
+            "gender": null,
+            "school": null,
+            "major": null,
+            "speciality": null,
+            "experence": null,
+            "avatar": null,
+            "count_of_followers": 1,
+            "count_of_followings": 0,
+            "last_auth_time": "2013-11-29T14:20:48.000Z",
+            "last_login_time": "2013-11-29T14:20:48.000Z",
+            "created_at": "2013-11-29T14:20:48.000Z",
+            "updated_at": "2013-11-29T14:20:57.000Z"
             }
 
 ## Users Counter Collection [/users/count]
@@ -149,6 +161,45 @@ when the user {id} is current user itself, return HTTP 500 error.
             {
                 "state": 2
             }
+
+## User followers list [/users/{id}/followers]
+### Get the list of followers [GET]
++ Response 200
+    + Body
+
+            [{
+            "id": 2,
+            "email": "lifeisgood@leapoahead.com",
+            "nickname": "Sherry",
+            "gender": null,
+            "school": null,
+            "major": null,
+            "speciality": null,
+            "experence": null,
+            "avatar": null,
+            "count_of_followers": 1,
+            "count_of_followings": 0,
+            "last_auth_time": "2013-11-29T14:20:48.000Z",
+            "last_login_time": "2013-11-29T14:20:48.000Z",
+            "created_at": "2013-11-29T14:20:48.000Z",
+            "updated_at": "2013-11-29T14:20:57.000Z"
+            }, {
+            "id": 3,
+            "email": "bigtree@leapoahead.com",
+            "nickname": "BigTree",
+            "gender": null,
+            "school": null,
+            "major": null,
+            "speciality": null,
+            "experence": null,
+            "avatar": null,
+            "count_of_followers": 1,
+            "count_of_followings": 0,
+            "last_auth_time": "2013-11-29T14:20:48.000Z",
+            "last_login_time": "2013-11-29T14:20:48.000Z",
+            "created_at": "2013-11-29T14:20:48.000Z",
+            "updated_at": "2013-11-29T14:20:48.000Z"
+            }]
 
 
 
