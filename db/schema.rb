@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(version: 20131127001104) do
   add_index "projects", ["title"], name: "index_projects_on_title", using: :btree
 
   create_table "public_activities", force: true do |t|
+    t.integer  "user_id"
+    t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
