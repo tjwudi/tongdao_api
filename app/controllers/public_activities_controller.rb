@@ -1,0 +1,2 @@
+class PublicActivitiesController < ApplicationController
+end

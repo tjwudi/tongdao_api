@@ -21,6 +21,8 @@ TongdaoApi::Application.routes.draw do
 
     collection do
       get 'count'
+      get 'followers'
+      get 'followings'
     end
 
     member do
@@ -37,8 +39,8 @@ TongdaoApi::Application.routes.draw do
     end
 
     member do
-      post 'toggle_like' => 'project_likes#toggle_like'
-      get 'state_like'   => 'project_likes#state_like'
+      post 'toggle_like' 
+      get 'state_like'  
     end
   end
 

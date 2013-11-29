@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
 
   has_many :project_likes
   has_many :liked_projects, through: :project_likes, source: :project
+  
+  def self.per_page
+    return 15
+  end
 
 
   def self.authorize(email, encrypted_password)
@@ -24,7 +28,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  # follow a user
   def follow_user!(user = nil)
     return false if user.nil?
     self.follow!(user)
@@ -34,7 +37,6 @@ class User < ActiveRecord::Base
     self.save
   end
 
-  # unfollow a user
   def unfollow_user!(user = nil)
     return false if user.nil?
     self.unfollow!(user)
@@ -68,6 +70,4 @@ class User < ActiveRecord::Base
       return super({:except => [:encrypted_password, :contact, :auth_token]})
     end
   end
-
-
 end

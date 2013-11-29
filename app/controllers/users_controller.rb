@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
-  skip_before_action :authenticate, only: [:create, :count]
+  skip_before_action :authenticate, only: [:create, :count, :followers, :followings]
 
   def index 
     return render_blank(500) unless params.include?(:auto_complete_word) && params.include?(:count)
@@ -32,7 +32,6 @@ class UsersController < ApplicationController
     current_user_cache.avatar = params[:avatar] if params.include? :avatar
     current_user_cache.experence = params[:experence] if params.include? :experence
     current_user_cache.major = params[:major] if params.include? :major
-    
 
     begin
       current_user_cache.save
@@ -67,8 +66,19 @@ class UsersController < ApplicationController
     render json: get_followship(current_user_cache, target_user)
   end
 
-  private
+  def followers
+    @users = User.find(params[:id]).followers_relation(User).page(params[:page])
 
+    render json: @users
+  end
+
+  def followings
+    @users = User.find(params[:id]).followables_relation(User).page(params[:page])
+
+    render json: @users
+  end
+
+  private
   def get_followship(current_user_cache, target_user)
     result = {}
 

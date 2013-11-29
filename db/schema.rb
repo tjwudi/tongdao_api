@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131122041010) do
+ActiveRecord::Schema.define(version: 20131127001104) do
 
   create_table "follows", force: true do |t|
     t.string   "follower_type"
@@ -104,6 +104,11 @@ ActiveRecord::Schema.define(version: 20131122041010) do
   add_index "projects", ["category"], name: "index_projects_on_category", using: :btree
   add_index "projects", ["school"], name: "index_projects_on_school", using: :btree
   add_index "projects", ["title"], name: "index_projects_on_title", using: :btree
+
+  create_table "public_activities", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "tag_attachments", force: true do |t|
     t.integer  "tag_id"

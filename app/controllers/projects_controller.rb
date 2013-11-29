@@ -4,7 +4,6 @@ class ProjectsController < ApplicationController
 
 
   def index 
-  
     if params.include?(:tag)
       # view by tag
       projects = Tag.find_by(name: params["tag"]).projects.order("id desc").page(params[:page])
@@ -100,9 +99,23 @@ class ProjectsController < ApplicationController
     return render json: {"count" => Project.all.count} 
   end
 
+  def toggle_like
+    target_project = Project.find(params[:id]);
 
+    current_user.toggle_like!(target_project)
+    return render json: get_like_state(current_user, target_project)
+  end
+
+  def state_like
+    return render json: get_like_state(current_user, Project.find(params[:id]))
+  end
 
   private
+  def get_like_state(current_user_cache, target_project)
+    result = {}
+    result[:state] = current_user_cache.likes?(target_project) ? 0 : 1
+    return result
+  end
 
   def owner_auth
     membership = Membership.find_by(user_id: current_user.id, project_id: params[:id])
