@@ -162,8 +162,11 @@ when the user {id} is current user itself, return HTTP 500 error.
                 "state": 2
             }
 
-## User followers list [/users/{id}/followers]
+## User followers list [/users/{id}/followers{?page}]
 ### Get the list of followers [GET]
++ Parameters
+    + page(optional, string)
+
 + Response 200
     + Body
 
@@ -200,6 +203,50 @@ when the user {id} is current user itself, return HTTP 500 error.
             "created_at": "2013-11-29T14:20:48.000Z",
             "updated_at": "2013-11-29T14:20:48.000Z"
             }]
+
+
+## User followings list [/users/{id}/followings{?page}]
+### Get the list of followings [GET]
++ Parameters
+    + page(optional, string)
+
++ Response 200
+    + Body
+
+            [{
+            "id": 2,
+            "email": "lifeisgood@leapoahead.com",
+            "nickname": "Sherry",
+            "gender": null,
+            "school": null,
+            "major": null,
+            "speciality": null,
+            "experence": null,
+            "avatar": null,
+            "count_of_followers": 1,
+            "count_of_followings": 0,
+            "last_auth_time": "2013-11-29T14:20:48.000Z",
+            "last_login_time": "2013-11-29T14:20:48.000Z",
+            "created_at": "2013-11-29T14:20:48.000Z",
+            "updated_at": "2013-11-29T14:20:57.000Z"
+            }, {
+            "id": 3,
+            "email": "bigtree@leapoahead.com",
+            "nickname": "BigTree",
+            "gender": null,
+            "school": null,
+            "major": null,
+            "speciality": null,
+            "experence": null,
+            "avatar": null,
+            "count_of_followers": 1,
+            "count_of_followings": 0,
+            "last_auth_time": "2013-11-29T14:20:48.000Z",
+            "last_login_time": "2013-11-29T14:20:48.000Z",
+            "created_at": "2013-11-29T14:20:48.000Z",
+            "updated_at": "2013-11-29T14:20:48.000Z"
+            }]
+
 
 
 
@@ -588,3 +635,42 @@ Returns a single field `state`, `state = 1` states the user can like the project
 # Group Project Posts 
 ## Project Posts Collection
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Group Public Acitivites
+## User followings' public activities collection [/public_activities{?page}]
+### Get public activities 
++ Request 
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
++ Response
+    + Body
+
+            [{
+              "id": 2,
+              "user_id": 3,
+              "data": "fuck~~~",
+              "created_at": "2013-11-29T15:34:56.000Z",
+              "updated_at": "2013-11-29T15:35:07.000Z"
+            }, {
+              "id": 1,
+              "user_id": 2,
+              "data": "hahahaha",
+              "created_at": "2013-11-29T15:34:35.000Z",
+              "updated_at": "2013-11-29T15:34:43.000Z"
+            }]
