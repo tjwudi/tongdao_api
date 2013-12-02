@@ -16,7 +16,7 @@ TongdaoApi::Application.routes.draw do
   #   resources :products
   
 
-  resources :users, :only => [:create, :update, :index] do
+  resources :users, :only => [:create, :update, :index], :defaults => { :format => 'json' } do
     resources :projects, :only => [:index]
 
     collection do

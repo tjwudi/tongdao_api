@@ -59,15 +59,4 @@ class User < ActiveRecord::Base
     end
   end
 
-  def as_json(options=nil)
-    if options.nil? 
-      return super({})
-    elsif options[:type]==:auth_token_only
-      return super({:only => [:id, :auth_token]})
-    elsif options[:type]==:need_auth_token
-      return super({:except => [:encrypted_password, :contact]})
-    else
-      return super({:except => [:encrypted_password, :contact, :auth_token]})
-    end
-  end
 end
