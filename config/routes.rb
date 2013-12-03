@@ -35,13 +35,15 @@ TongdaoApi::Application.routes.draw do
   end
 
   resources :projects, :defaults => { format: :json } do
+    resources :project_comments, :only => [:index, :create]
+
     collection do
       get 'count'
     end
 
     member do
       post 'toggle_like' 
-      get 'state_like'  
+      get 'state_like'
     end
   end
 

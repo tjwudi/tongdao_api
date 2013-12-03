@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131127001104) do
+ActiveRecord::Schema.define(version: 20131203045005) do
 
   create_table "follows", force: true do |t|
     t.string   "follower_type"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20131127001104) do
     t.string   "emotion"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_post_id"
   end
 
   add_index "project_comments", ["project_id"], name: "index_project_comments_on_project_id", using: :btree
