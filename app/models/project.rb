@@ -17,6 +17,7 @@ class Project < ActiveRecord::Base
   has_many :tags, through: :tag_attachments, source: :tag
 
   has_many :project_posts, dependent: :destroy
+  has_one :featured_post, :class_name => :ProjectPost
 
   validates :title, presence: true
   validates :school, presence: true

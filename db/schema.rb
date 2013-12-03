@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131203045005) do
+ActiveRecord::Schema.define(version: 20131203064054) do
 
   create_table "follows", force: true do |t|
     t.string   "follower_type"
@@ -80,7 +80,6 @@ ActiveRecord::Schema.define(version: 20131203045005) do
 
   create_table "project_posts", force: true do |t|
     t.integer  "project_id"
-    t.boolean  "featured"
     t.string   "title"
     t.text     "content"
     t.datetime "created_at"
