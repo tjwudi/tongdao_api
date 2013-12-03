@@ -754,6 +754,103 @@ Returns a single field `state`, `state = 1` states the user can like the project
 
 
 
+
+
+
+
+# Group Project Comments
+## Project Comments [/projects/{id}/project_comments{?page}]
+### List all comments in a project [GET]
++ Parameters
+    + page (required, integer) ... page number
+
++ Response 200 (application/json)
+    + Body
+
+            [
+               {
+                  "id": 1
+                  "content":"xxx",
+                  "emotion":"zzz",
+                  "user":{
+                     "id":1,
+                     "nickname":"bEg3CSUuy",
+                     "school":"DJyZ9koy8",
+                     "gender":"Fph3n20lI",
+                     "major":"bTQV8IObN",
+                     "speciality":"AUUrPFeA1",
+                     "experence":"7TBNL9ED7",
+                     "avatar":"bHlNdQRiW",
+                     "count_of_followers":0,
+                     "count_of_followings":2
+                  }
+               }
+            ]
+
+
+### Create a project_comment [POST]
++ Request (application/json)
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+    
+    + Body
+    
+            {
+            "content": "xxx",
+            "emotion": "jjj"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+               "id": 1, 
+               "content":"xxx",
+               "emotion":"zzz",
+               "user":{
+                  "id":1,
+                  "nickname":"bEg3CSUuy",
+                  "school":"DJyZ9koy8",
+                  "gender":"Fph3n20lI",
+                  "major":"bTQV8IObN",
+                  "speciality":"AUUrPFeA1",
+                  "experence":"7TBNL9ED7",
+                  "avatar":"bHlNdQRiW",
+                  "count_of_followers":0,
+                  "count_of_followings":2
+               }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Group Public Acitivites
 ## User followings public activities collection [/public_activities{?page}]
 ### Get public activities [GET]
