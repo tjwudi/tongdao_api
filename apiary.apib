@@ -23,29 +23,34 @@ This API only works for project member invitation page.
     + Body
     
             [
-            {
-            "id": 2,
-            "email": "lifeisgood@leapoahead.com",
-            "nickname": "Sherry",
-            "gender": null,
-            "school": null,
-            "major": null,
-            "speciality": null,
-            "experence": null,
-            "avatar": null,
-            "count_of_followers": 1,
-            "count_of_followings": 0,
-            "last_auth_time": "2013-11-29T14:20:48.000Z",
-            "last_login_time": "2013-11-29T14:20:48.000Z",
-            "created_at": "2013-11-29T14:20:48.000Z",
-            "updated_at": "2013-11-29T14:20:57.000Z"
-            }
+               {
+                  "id":1,
+                  "nickname":"V2w4FZieQ",
+                  "school":"MJKLD7IbA",
+                  "major":"kydNwpAVr",
+                  "speciality":"F6la7sX0k",
+                  "experence":"3E4pnHSbK",
+                  "avatar":"q24nzgQ99",
+                  "count_of_followers":0,
+                  "count_of_followings":2
+               },
+               {
+                  "id":5,
+                  "nickname":"V5JBfpe",
+                  "school":null,
+                  "major":null,
+                  "speciality":null,
+                  "experence":null,
+                  "avatar":null,
+                  "count_of_followers":0,
+                  "count_of_followings":0
+               }
             ]
 
 ### Create a User [POST]
-Create a new user. Returns a new token for the User.
+Create a new user. 
 When error occurs, it returns HTTP 500 with an empty json array.  
-Duplicated records error will be shown as 500 error, too. In this case, `email` and `nickname` field are unique in database.
+
 + Request (application/json)
     + Body
     
@@ -59,8 +64,21 @@ Duplicated records error will be shown as 500 error, too. In this case, `email` 
     + Body 
     
             {
-            "token": "theusertoken", 
-            "id": 1S
+               "id":16,
+               "email":"webmaster@sina.com",
+               "nickname":"johnx",
+               "gender":null,
+               "contact":null,
+               "school":null,
+               "major":null,
+               "speciality":null,
+               "experence":null,
+               "avatar":null,
+               "auth_token":null,
+               "count_of_followers":0,
+               "count_of_followings":0,
+               "last_auth_time":null,
+               "last_login_time":null
             }
 
 ## User Collection [/users/{id}]
@@ -170,39 +188,30 @@ when the user {id} is current user itself, return HTTP 500 error.
 + Response 200
     + Body
 
-            [{
-            "id": 2,
-            "email": "lifeisgood@leapoahead.com",
-            "nickname": "Sherry",
-            "gender": null,
-            "school": null,
-            "major": null,
-            "speciality": null,
-            "experence": null,
-            "avatar": null,
-            "count_of_followers": 1,
-            "count_of_followings": 0,
-            "last_auth_time": "2013-11-29T14:20:48.000Z",
-            "last_login_time": "2013-11-29T14:20:48.000Z",
-            "created_at": "2013-11-29T14:20:48.000Z",
-            "updated_at": "2013-11-29T14:20:57.000Z"
-            }, {
-            "id": 3,
-            "email": "bigtree@leapoahead.com",
-            "nickname": "BigTree",
-            "gender": null,
-            "school": null,
-            "major": null,
-            "speciality": null,
-            "experence": null,
-            "avatar": null,
-            "count_of_followers": 1,
-            "count_of_followings": 0,
-            "last_auth_time": "2013-11-29T14:20:48.000Z",
-            "last_login_time": "2013-11-29T14:20:48.000Z",
-            "created_at": "2013-11-29T14:20:48.000Z",
-            "updated_at": "2013-11-29T14:20:48.000Z"
-            }]
+            [
+               {
+                  "id":1,
+                  "nickname":"V2w4FZieQ",
+                  "school":"MJKLD7IbA",
+                  "major":"kydNwpAVr",
+                  "speciality":"F6la7sX0k",
+                  "experence":"3E4pnHSbK",
+                  "avatar":"q24nzgQ99",
+                  "count_of_followers":0,
+                  "count_of_followings":2
+               },
+               {
+                  "id":5,
+                  "nickname":"V5JBfpe",
+                  "school":null,
+                  "major":null,
+                  "speciality":null,
+                  "experence":null,
+                  "avatar":null,
+                  "count_of_followers":0,
+                  "count_of_followings":0
+               }
+            ]
 
 
 ## User followings list [/users/{id}/followings{?page}]
@@ -213,39 +222,30 @@ when the user {id} is current user itself, return HTTP 500 error.
 + Response 200
     + Body
 
-            [{
-            "id": 2,
-            "email": "lifeisgood@leapoahead.com",
-            "nickname": "Sherry",
-            "gender": null,
-            "school": null,
-            "major": null,
-            "speciality": null,
-            "experence": null,
-            "avatar": null,
-            "count_of_followers": 1,
-            "count_of_followings": 0,
-            "last_auth_time": "2013-11-29T14:20:48.000Z",
-            "last_login_time": "2013-11-29T14:20:48.000Z",
-            "created_at": "2013-11-29T14:20:48.000Z",
-            "updated_at": "2013-11-29T14:20:57.000Z"
-            }, {
-            "id": 3,
-            "email": "bigtree@leapoahead.com",
-            "nickname": "BigTree",
-            "gender": null,
-            "school": null,
-            "major": null,
-            "speciality": null,
-            "experence": null,
-            "avatar": null,
-            "count_of_followers": 1,
-            "count_of_followings": 0,
-            "last_auth_time": "2013-11-29T14:20:48.000Z",
-            "last_login_time": "2013-11-29T14:20:48.000Z",
-            "created_at": "2013-11-29T14:20:48.000Z",
-            "updated_at": "2013-11-29T14:20:48.000Z"
-            }]
+            [
+               {
+                  "id":1,
+                  "nickname":"V2w4FZieQ",
+                  "school":"MJKLD7IbA",
+                  "major":"kydNwpAVr",
+                  "speciality":"F6la7sX0k",
+                  "experence":"3E4pnHSbK",
+                  "avatar":"q24nzgQ99",
+                  "count_of_followers":0,
+                  "count_of_followings":2
+               },
+               {
+                  "id":5,
+                  "nickname":"V5JBfpe",
+                  "school":null,
+                  "major":null,
+                  "speciality":null,
+                  "experence":null,
+                  "avatar":null,
+                  "count_of_followers":0,
+                  "count_of_followings":0
+               }
+            ]
 
 
 
@@ -263,14 +263,12 @@ If any error occurs (duplicated email field), response it with HTTP 500 error.
             "email": "webmaster@leapoahead.com"
             }
 
-+ Response 201 (application/json)
++ Response 200 (application/json)
     + Body
     
             {
             "id":4,
-            "email":"webmaster@leapoahead.com",
-            "created_at":"2013-11-16T10:47:57.149Z",
-            "updated_at":"2013-11-16T10:47:57.149Z"
+            "email":"webmaster@leapoahead.com"
             }
 
 ## Pending user collection [/pending_users/{id}]
@@ -282,10 +280,10 @@ Just ... Destroy it. Returns HTTP 500 when failed.
 
             []
 
-## Pending Users Counter [/pending_user/count{?email}]
+## Pending Users Existance Checker [/pending_user/exist{?email}]
 ### Get count of pending users meets the criterias [GET]
 Query for the count of pending user meets the criterias provided by params. In this case, the email field.  
-Returns a json object which owns a `count` field. 
+Returns a json object which owns a `state` field. `state = 1` for email exists in pending users, `state = 2` for email exists for current users, `state = 0` for all good.
 
 + Parameters
     + email(required, string) ... user's email
@@ -294,8 +292,19 @@ Returns a json object which owns a `count` field.
     + Body
 
             {
-            "count": 1
+            "state": 1
             }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -375,6 +384,19 @@ HTTP 401 when unauthorized, HTTP 500 when unknown error.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Group Projects
 ## Projects Collection [/projects{?page, tags, per_page}]
 ### Get projects list [GET]
@@ -390,28 +412,41 @@ per_page: 15
     + Body 
 
             [
-            {
-            "id": 21,
-            "title": "校园绿化项目",
-            "tags": [{"name":"School"},{"name":"Cooking"}],
-            "school": "同济大学",
-            "state": "招人中",
-            "count_of_likes": 104,
-            "count_of_views": 1002,
-            "created_at":"2013-11-16T10:47:57.149Z",
-            "updated_at":"2013-11-16T10:47:57.149Z"
-            },
-            {
-            "id": 22,
-            "title": "校园绿化项目2",
-            "tags": [{"name":"School"}],
-            "school": "同济大学",
-            "state": "进行中",
-            "count_of_likes": 102,
-            "count_of_views": 1002,
-            "created_at":"2013-11-16T10:47:57.149Z",
-            "updated_at":"2013-11-16T10:47:57.149Z"
-            }
+               {
+                  "id":14,
+                  "title":"同济大学 u6EOPyzio",
+                  "school":"duycff University",
+                  "state":"Wanting!",
+                  "count_of_likes":0,
+                  "count_of_views":0,
+                  "created_at":"2013-12-03T02:53:32.000Z",
+                  "updated_at":"2013-12-03T02:53:32.000Z",
+                  "tags":[
+                     {
+                        "name":"School"
+                     },
+                     {
+                        "name":"Cooking"
+                     },
+                     {
+                        "name":"c0zpt"
+                     }
+                  ],
+                  "members":[
+                     {
+                        "id":1,
+                        "nickname":"8iEvVl7qu",
+                        "school":"xKMEHvHCt",
+                        "gender":"JDgU6mMqM",
+                        "major":"RiqHysSw5",
+                        "speciality":"YAMOdoPrK",
+                        "experence":"49GaNEi4c",
+                        "avatar":"S0vCuH6Wg",
+                        "count_of_followers":0,
+                        "count_of_followings":2
+                     }
+                  ]
+               }
             ]
 
 ### Create a new project [POST]
@@ -433,17 +468,35 @@ Create a new project and set current user as one of the owners.
 
 + Response 200
             
-            {
-                "id": 1,
-                "title": "校园绿化项目",
-                "tags": [{"name":"School"},{"name":"Cooking"}],
-                "school": "同济大学",
-                "state": "招人中",
-                "count_of_likes": 104,
-                "count_of_views": 1002,
-                "created_at":"2013-11-16T10:47:57.149Z",
-                "updated_at":"2013-11-16T10:47:57.149Z"
-            }
+           {
+              "id":14,
+              "title":"同济大学 u6EOPyzio",
+              "school":"duycff University",
+              "state":"Wanting!",
+              "count_of_likes":0,
+              "count_of_views":0,
+              "created_at":"2013-12-03T02:53:32.000Z",
+              "updated_at":"2013-12-03T02:53:32.000Z",
+              "tags":[
+                 {
+                    "name":"School"
+                 }
+              ],
+              "members":[
+                 {
+                    "id":1,
+                    "nickname":"8iEvVl7qu",
+                    "school":"xKMEHvHCt",
+                    "gender":"JDgU6mMqM",
+                    "major":"RiqHysSw5",
+                    "speciality":"YAMOdoPrK",
+                    "experence":"49GaNEi4c",
+                    "avatar":"S0vCuH6Wg",
+                    "count_of_followers":0,
+                    "count_of_followings":2
+                 }
+              ]
+           }
 
 ## Project Collection [/projects/{id}]
 ### Get a project's information [GET]
@@ -451,16 +504,34 @@ Create a new project and set current user as one of the owners.
     + Body
 
             {
-                "id": 1,
-                "title": "校园绿化项目",
-                "tags": [{"name":"School"},{"name":"Cooking"}],
-                "school": "同济大学",
-                "state": "招人中",
-                "count_of_likes": 104,
-                "count_of_views": 1002,
-                "created_at":"2013-11-16T10:47:57.149Z",
-                "updated_at":"2013-11-16T10:47:57.149Z"
-            } 
+              "id":14,
+              "title":"同济大学 u6EOPyzio",
+              "school":"duycff University",
+              "state":"Wanting!",
+              "count_of_likes":0,
+              "count_of_views":0,
+              "created_at":"2013-12-03T02:53:32.000Z",
+              "updated_at":"2013-12-03T02:53:32.000Z",
+              "tags":[
+                 {
+                    "name":"School"
+                 }
+              ],
+              "members":[
+                 {
+                    "id":1,
+                    "nickname":"8iEvVl7qu",
+                    "school":"xKMEHvHCt",
+                    "gender":"JDgU6mMqM",
+                    "major":"RiqHysSw5",
+                    "speciality":"YAMOdoPrK",
+                    "experence":"49GaNEi4c",
+                    "avatar":"S0vCuH6Wg",
+                    "count_of_followers":0,
+                    "count_of_followings":2
+                 }
+              ]
+            }
             
 ### Update a project's information [PATCH]
 Update project information. All fields in the `Project` model is avaliable.  
@@ -483,17 +554,35 @@ The user should be the one of the owners of the project or he/she will get 401 E
 
 + Response 200
 
-            {
-                "id": 1,
-                "title": "校园绿化项目",
-                "tags": [{"name":"School"}],
-                "school": "同济大学",
-                "state": "招人中",
-                "count_of_likes": 104,
-                "count_of_views": 1002,
-                "created_at":"2013-11-16T10:47:57.149Z",
-                "updated_at":"2013-11-16T10:47:57.149Z"
-            }
+           {
+              "id":14,
+              "title":"同济大学 u6EOPyzio",
+              "school":"duycff University",
+              "state":"Wanting!",
+              "count_of_likes":0,
+              "count_of_views":0,
+              "created_at":"2013-12-03T02:53:32.000Z",
+              "updated_at":"2013-12-03T02:53:32.000Z",
+              "tags":[
+                 {
+                    "name":"School"
+                 }
+              ],
+              "members":[
+                 {
+                    "id":1,
+                    "nickname":"8iEvVl7qu",
+                    "school":"xKMEHvHCt",
+                    "gender":"JDgU6mMqM",
+                    "major":"RiqHysSw5",
+                    "speciality":"YAMOdoPrK",
+                    "experence":"49GaNEi4c",
+                    "avatar":"S0vCuH6Wg",
+                    "count_of_followers":0,
+                    "count_of_followings":2
+                 }
+              ]
+           }
 
 ### DELETE A PROJECT [DELETE]
 Only owners can delete the project. HTTP 500 when error occurs.
@@ -520,16 +609,34 @@ Show all projects where the user with specific id has membership in them.
     
             [
             {
-                "id": 1,
-                "title": "校园绿化项目",
-                "tags": [{"name":"School"}],
-                "school": "同济大学",
-                "state": "招人中",
-                "count_of_likes": 104,
-                "count_of_views": 1002,
-                "created_at":"2013-11-16T10:47:57.149Z",
-                "updated_at":"2013-11-16T10:47:57.149Z"
-            }[]
+              "id":14,
+              "title":"同济大学 u6EOPyzio",
+              "school":"duycff University",
+              "state":"Wanting!",
+              "count_of_likes":0,
+              "count_of_views":0,
+              "created_at":"2013-12-03T02:53:32.000Z",
+              "updated_at":"2013-12-03T02:53:32.000Z",
+              "tags":[
+                 {
+                    "name":"School"
+                 }
+              ],
+              "members":[
+                 {
+                    "id":1,
+                    "nickname":"8iEvVl7qu",
+                    "school":"xKMEHvHCt",
+                    "gender":"JDgU6mMqM",
+                    "major":"RiqHysSw5",
+                    "speciality":"YAMOdoPrK",
+                    "experence":"49GaNEi4c",
+                    "avatar":"S0vCuH6Wg",
+                    "count_of_followers":0,
+                    "count_of_followings":2
+                 }
+              ]
+            }
             ]
 
 
@@ -606,15 +713,13 @@ Returns a single field `state`, `state = 1` states the user can like the project
 + Response 200
     + Body
 
-            [ { "created_at" : "2013-11-17T17:07:36.000Z",
+            [ { 
                 "id" : 5,
-                "name" : "xx3",
-                "updated_at" : "2013-11-17T17:07:36.000Z"
+                "name" : "xx3"
               },
-              { "created_at" : "2013-11-17T17:07:38.000Z",
+              { 
                 "id" : 6,
-                "name" : "xx2",
-                "updated_at" : "2013-11-17T17:07:38.000Z"
+                "name" : "xx2"
               }
             ]
 
@@ -666,16 +771,20 @@ Returns a single field `state`, `state = 1` states the user can like the project
 
             [{
               "id": 2,
-              "user_id": 3,
+              "user": {
+                "id":1,
+                "nickname":"V2w4FZieQ",
+                "school":"MJKLD7IbA",
+                "major":"kydNwpAVr",
+                "speciality":"F6la7sX0k",
+                "experence":"3E4pnHSbK",
+                "avatar":"q24nzgQ99",
+                "count_of_followers":0,
+                "count_of_followings":2
+              },
               "data": "fuck~~~",
               "created_at": "2013-11-29T15:34:56.000Z",
               "updated_at": "2013-11-29T15:35:07.000Z"
-            }, {
-              "id": 1,
-              "user_id": 2,
-              "data": "hahahaha",
-              "created_at": "2013-11-29T15:34:35.000Z",
-              "updated_at": "2013-11-29T15:34:43.000Z"
             }]
 
 ## User Public Activities collection [/users/{id}/public_activities{?page}]
@@ -694,14 +803,18 @@ Returns a single field `state`, `state = 1` states the user can like the project
 
             [{
               "id": 2,
-              "user_id": 3,
+              "user": {
+                "id":1,
+                "nickname":"V2w4FZieQ",
+                "school":"MJKLD7IbA",
+                "major":"kydNwpAVr",
+                "speciality":"F6la7sX0k",
+                "experence":"3E4pnHSbK",
+                "avatar":"q24nzgQ99",
+                "count_of_followers":0,
+                "count_of_followings":2
+              },
               "data": "fuck~~~",
               "created_at": "2013-11-29T15:34:56.000Z",
               "updated_at": "2013-11-29T15:35:07.000Z"
-            }, {
-              "id": 1,
-              "user_id": 2,
-              "data": "hahahaha",
-              "created_at": "2013-11-29T15:34:35.000Z",
-              "updated_at": "2013-11-29T15:34:43.000Z"
             }]
