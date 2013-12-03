@@ -22,7 +22,4 @@ class Project < ActiveRecord::Base
   validates :school, presence: true
   validates :state, presence: true
 
-  def as_json(option = {})
-    super(:include => [:tags => { :only => [:name] }]   )
-  end
 end

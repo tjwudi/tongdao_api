@@ -8,13 +8,19 @@ class PendingUsersController < ApplicationController
       return render_blank(409)
     end
 
-    pending_user = PendingUser.create(params.permit(:email))
-    return render json: pending_user, status: 201
+    @pending_user = PendingUser.create(params.permit(:email))
+    
+    render "pending_users/show"
   end
 
-  def count 
+  def exist 
     return render_blank(500) unless params.include?(:email)
-    return render json: { count: PendingUser.where(params.permit(:email)).count }
+    
+    @state = 0
+    @state = 1 if PendingUser.where(params.permit(:email)).count > 0
+    @state = 2 if User.where(params.permit(:email)).count > 0
+
+    render "shared/state"
   end
 
   def destroy

@@ -8,12 +8,12 @@ class PublicActivitiesController < ApplicationController
     end
     @public_activities = PublicActivity.where(:user_id => @user_followings_ids).order('id desc').page(params[:page])
 
-    render json: @public_activities
+    render "public_activities/index"
   end
 
   def user_public_activities
     @public_activities = PublicActivity.where(:user_id => params[:id]).order('id desc').page(params[:page])
 
-    render json: @public_activities
+    render "public_activities/index"
   end
 end

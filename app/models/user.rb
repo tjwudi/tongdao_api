@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   has_many :project_likes
   has_many :liked_projects, through: :project_likes, source: :project
+
+  has_many :public_activities
   
   def self.per_page
     return 15

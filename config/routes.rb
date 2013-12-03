@@ -16,7 +16,7 @@ TongdaoApi::Application.routes.draw do
   #   resources :products
   
 
-  resources :users, :only => [:create, :update, :index], :defaults => { :format => 'json' } do
+  resources :users, :only => [:create, :update, :index], :defaults => { format: :json } do
     resources :projects, :only => [:index]
 
     collection do
@@ -34,7 +34,7 @@ TongdaoApi::Application.routes.draw do
     end
   end
 
-  resources :projects do
+  resources :projects, :defaults => { format: :json } do
     collection do
       get 'count'
     end
@@ -45,17 +45,17 @@ TongdaoApi::Application.routes.draw do
     end
   end
 
-  resources :pending_users, :only => [:create, :destroy] do
+  resources :pending_users, :only => [:create, :destroy], :defaults => { format: :json } do
     collection do
-      get 'count'
+      get 'exist'
     end
   end
 
-  resources :sessions, :only => [:create, :destroy]
-  resources :tags, :only => [:index] 
-  resources :public_activities, :only => [:index]
+  resources :sessions, :only => [:create, :destroy], :defaults => { format: :json }
+  resources :tags, :only => [:index], :defaults => { format: :json }
+  resources :public_activities, :only => [:index], :defaults => { format: :json } 
 
-  root 'application#not_found'
+  root 'application#not_found', :defaults => { format: :json }
 
   # Example resource route with options:
   #   resources :products do

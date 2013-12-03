@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
+    
     @user.nickname = params[:nickname] if params.include? :nickname
     @user.gender = params[:gender] if params.include? :gender
     @user.contact = params[:contact] if params.include? :contact
@@ -25,19 +26,16 @@ class UsersController < ApplicationController
     @user.avatar = params[:avatar] if params.include? :avatar
     @user.experence = params[:experence] if params.include? :experence
     @user.major = params[:major] if params.include? :major
-
-    begin
-      @user.save
+    
+    @user.save
       
-      render "users/show"
-    rescue
-      p "unable to update user information"
-      return render_blank(500)
-    end
+    render "users/show"
   end
 
   def count
-    return render json: { count: User.all.count }, status: 200
+    @count = User.all.count 
+
+    render "shared/count"
   end
 
   def toggle_follow
@@ -50,14 +48,18 @@ class UsersController < ApplicationController
       current_user_cache.follow_user!(target_user)
     end
     
-    render json: get_followship(current_user_cache, target_user)
+    @state = get_followship(current_user_cache, target_user)
+
+    render "shared/state"
   end
 
   def followship
     current_user_cache = current_user
     target_user = User.find(params[:id])
   
-    render json: get_followship(current_user_cache, target_user)
+    @state = get_followship(current_user_cache, target_user)
+
+    render "shared/state"
   end
 
   def followers
@@ -74,19 +76,17 @@ class UsersController < ApplicationController
 
   private
   def get_followship(current_user_cache, target_user)
-    result = {}
-
     b_followed = target_user.follows?(current_user_cache)
     b_following = current_user_cache.follows?(target_user)
     
     if b_followed && b_following
-      result[:state] = 3
+      return 3
     elsif b_followed && !b_following
-      result[:state] = 2
+      return 2
     elsif !b_followed && b_following
-      result[:state] = 1
+      return 1
     else
-      result[:state] = 0
+      return 0
     end
     return result
   end

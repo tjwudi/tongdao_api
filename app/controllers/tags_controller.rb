@@ -4,11 +4,14 @@ class TagsController < ApplicationController
 
   def index
     return render_blank(500) unless params.include?(:auto_complete_word) && params.include?(:count)
+
     unless params.include?(:match) && params[:match].to_s == "1"
-      return render json: Tag.where("name LIKE '%#{params[:auto_complete_word]}%'").limit(params[:count])
+      @tags = Tag.where("name LIKE '%#{params[:auto_complete_word]}%'").limit(params[:count])
     else 
-      return render json: Tag.where(name: params[:auto_complete_word]).limit(params[:count])
+      @tags = Tag.where(name: params[:auto_complete_word]).limit(params[:count])
     end
+
+    render "tags/index"
   end
 
 end
