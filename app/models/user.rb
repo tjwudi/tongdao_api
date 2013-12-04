@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :liked_projects, through: :project_likes, source: :project
 
   has_many :public_activities
+
+  has_many :tokens, dependent: :destroy
   
   def self.per_page
     return 15
@@ -21,13 +23,7 @@ class User < ActiveRecord::Base
 
   def self.authorize(email, encrypted_password)
     user = User.find_by email: email, encrypted_password: encrypted_password
-    if user 
-      user.generate_authentication_token if user.auth_token.nil?
-      user.save
-      return user
-    else
-      return nil
-    end
+    return user
   end
 
   def follow_user!(user = nil)
@@ -49,16 +45,8 @@ class User < ActiveRecord::Base
   end
 
   def deauthorize
-    self.auth_token = nil
-    self.save
+    @token.destroy
   end
 
-  def generate_authentication_token
-    if Rails.env.production?
-      self.auth_token = SecureRandom.hex(32)
-    else
-      self.auth_token = "theusertoken"
-    end
-  end
 
 end

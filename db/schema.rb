@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131203064054) do
+ActiveRecord::Schema.define(version: 20131204150410) do
 
   create_table "follows", force: true do |t|
     t.string   "follower_type"
@@ -130,6 +130,13 @@ ActiveRecord::Schema.define(version: 20131203064054) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
+
+  create_table "tokens", force: true do |t|
+    t.string   "token",      null: false
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                           null: false

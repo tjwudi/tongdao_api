@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   def create
     @user = User.authorize(params[:email], params[:encrypted_password])
     if @user
+      token = Token.create(token: generate_authentication_token, user: @user)
       @user.last_login_time = DateTime.now
 
       render "users/show"
@@ -15,5 +16,15 @@ class SessionsController < ApplicationController
 
   def destroy
     current_user.deauthorize
+  end
+
+  private
+
+  def generate_authentication_token
+    if Rails.env.production?
+      return SecureRandom.hex(32)
+    else
+      return "theusertoken"
+    end
   end
 end

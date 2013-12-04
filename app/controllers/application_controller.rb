@@ -66,23 +66,26 @@ class ApplicationController < ActionController::API
   end
 
   def refresh_auth_time
-    if current_user
-      current_user.last_auth_time = DateTime.now
-      current_user.save()
+    if @token
+      @token.touch
     end
   end
 
   def authenticate
     return render_blank(401) unless request.headers.include?("HTTP_AUTH_TOKEN") && request.headers.include?("HTTP_AUTH_EMAIL") 
 
-    @current_user = User.find_by(email: request.headers[:HTTP_AUTH_EMAIL], auth_token: request.headers[:HTTP_AUTH_TOKEN])
+    @current_user = User.find_by(email: request.headers[:HTTP_AUTH_EMAIL])
+
     if @current_user.nil?
       return render_blank(401)
     end
 
-    if ((DateTime.now.to_f - @current_user.last_auth_time.to_f).to_i > MAX_AUTH_INTERVAL)
-      @current_user.deauthorize
+    @token = @current_user.tokens.find_by(token: request.headers[:HTTP_AUTH_TOKEN])
+
+    if ! @token.nil? &&  ((DateTime.now.to_f - @token.updated_at.to_f).to_i > MAX_AUTH_INTERVAL)
+      @token.destroy
       return render_blank(401)
     end
   end
+  
 end
