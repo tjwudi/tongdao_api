@@ -738,7 +738,66 @@ Returns a single field `state`, `state = 1` states the user can like the project
 
 
 # Group Project Posts 
-## Project Posts Collection
+## Project Posts Collection [/projects/{id}/project_posts{?page}]
+### List all posts in a project [GET]
++ Parameters
+    + page (required, integer) ... page number
+
++ Response 200 (application/json)
+    + Body
+
+            [
+               {
+                  "id":1,
+                  "created_at":"2013-12-03T06:56:53.000Z",
+                  "updated_at":"2013-12-03T06:56:53.000Z",
+                  "title":"jtXPo7GH26",
+                  "content":"dYol0q4W"
+               }
+            ]
+
+
+### Create project post [POST]
++ Request (application/json)
+    + Body
+
+            {
+                  "title":"x",
+                  "content":"x"
+            }
+
+
++ Response 200 (application/json)
+    + Body
+
+            {
+               "id":7,
+               "created_at":"2013-12-03T15:36:15.373Z",
+               "updated_at":"2013-12-03T15:36:15.373Z",
+               "title":"x",
+               "content":"x"
+            }
+
+
+## Project Post Collection [/projects/{id}/project_posts/{id}]
+### Get a project post
++ Response 200 (application/json)
+    + Body
+
+            {
+               "id":7,
+               "created_at":"2013-12-03T15:36:15.373Z",
+               "updated_at":"2013-12-03T15:36:15.373Z",
+               "title":"x",
+               "content":"x"
+            }
+
+
+
+
+
+
+
 
 
 
