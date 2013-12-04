@@ -62,9 +62,7 @@ class ApplicationController < ActionController::API
   end
 
   def current_user
-    unless request.headers[:HTTP_AUTH_TOKEN].nil?
-      return User.find_by(auth_token: request.headers[:HTTP_AUTH_TOKEN])
-    end
+    return @current_user
   end
 
   def refresh_auth_time
@@ -76,12 +74,14 @@ class ApplicationController < ActionController::API
 
   def authenticate
     return render_blank(401) unless request.headers.include?("HTTP_AUTH_TOKEN") && request.headers.include?("HTTP_AUTH_EMAIL") 
-    user = User.find_by(email: request.headers[:HTTP_AUTH_EMAIL], auth_token: request.headers[:HTTP_AUTH_TOKEN])
-    if user.nil?
+
+    @current_user = User.find_by(email: request.headers[:HTTP_AUTH_EMAIL], auth_token: request.headers[:HTTP_AUTH_TOKEN])
+    if @current_user.nil?
       return render_blank(401)
     end
-    if ((DateTime.now.to_f - user.last_auth_time.to_f).to_i > MAX_AUTH_INTERVAL)
-      user.deauthorize
+
+    if ((DateTime.now.to_f - @current_user.last_auth_time.to_f).to_i > MAX_AUTH_INTERVAL)
+      @current_user.deauthorize
       return render_blank(401)
     end
   end

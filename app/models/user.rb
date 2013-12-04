@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   def self.authorize(email, encrypted_password)
     user = User.find_by email: email, encrypted_password: encrypted_password
     if user 
-      user.generate_authentication_token
+      user.generate_authentication_token if user.auth_token.nil?
       user.save
       return user
     else

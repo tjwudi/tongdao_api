@@ -9,7 +9,8 @@ class ProjectPostsController < ApplicationController
   end
 
   def show
-    @project_post = ProjectPost.find(params[:id])
+    @project = Project.find(params[:project_id])
+    @project_post = @project.project_posts.find(params[:id])
 
     render "project_posts/show"
   end
