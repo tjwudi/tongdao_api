@@ -15,11 +15,23 @@ class ProjectPostsController < ApplicationController
     render "project_posts/show"
   end
 
+  def show_featured
+    @project = Project.find(params[:project_id])
+    @project_post = @project.featured_post
+    
+    if @project_post.nil?
+      render_blank(404)
+    else
+      render "project_posts/show"
+    end
+  end
+
   def create
     @project = Project.find(params[:project_id])
     @project_post = ProjectPost.new(params.permit(:title, :content))
     @project_post.project = @project
     @project_post.set_as_featured_post if params.include?(:featured) && params[:featured].to_s == "true"
+
     @project_post.save
 
     render "project_posts/show"

@@ -6,5 +6,6 @@ class ProjectPost < ActiveRecord::Base
   
   def set_as_featured_post
     self.project.featured_post = self
+    self.project.save
   end
 end

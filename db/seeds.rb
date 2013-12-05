@@ -27,6 +27,10 @@ Project.create([
   { title: "nice project 7", category: "literature", school: "Tongji University", state: "wanting" }
 ])
 
+ProjectPost.create([
+  { title: "xx", content: "xx", project_id: 1 }
+])
+
 Membership.create([
   { user_id: 1, project_id: 1, is_owner: false},
   { user_id: 1, project_id: 2, is_owner: true },

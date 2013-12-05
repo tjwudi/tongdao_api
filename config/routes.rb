@@ -38,6 +38,10 @@ TongdaoApi::Application.routes.draw do
     resources :project_comments, :only => [:index, :create]
     resources :project_posts, :only => [:index, :show, :create, :destroy, :update] do
       resources :project_comments, :only => [:index, :create]
+
+      collection do
+        get 'show_featured'
+      end
     end
 
     collection do

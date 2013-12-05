@@ -2,8 +2,13 @@ class ProjectCommentsController < ApplicationController
   skip_before_action :authenticate, :only => [:index]
 
   def index
-    @project = Project.find(params["project_id"])
-    @project_comments = @project.project_comments
+    if params.include?(:project_post_id) 
+      @project_post = ProjectPost.find(params[:project_post_id])
+      @project_comments = @project_post.project_comments
+    else
+      @project = Project.find(params["project_id"])
+      @project_comments = @project.project_comments
+    end
 
     render "project_comments/index"
   end
@@ -14,7 +19,12 @@ class ProjectCommentsController < ApplicationController
     @project_comment = ProjectComment.new(params.permit(:content, :emotion))
     @project_comment.user = current_user
     @project_comment.project = @project
-    @project_comment.project_post = nil
+    
+    if params.include?("project_post_id")
+      @project_comment.project_post = ProjectPost.find(params[:project_post_id])
+    else
+      @project_comment.project_post = nil
+    end
 
     @project_comment.save
 
