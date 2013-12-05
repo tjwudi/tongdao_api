@@ -5,17 +5,17 @@ class SessionsController < ApplicationController
   def create
     @user = User.authorize(params[:email], params[:encrypted_password])
     if @user
-      token = Token.create(token: generate_authentication_token, user: @user)
+      @token = Token.create(token: generate_authentication_token, user: @user)
       @user.last_login_time = DateTime.now
-
-      render "users/show"
+      
+      render "tokens/show"
     else
       return render_blank(403)
     end
   end
 
   def destroy
-    current_user.deauthorize
+    @token.destroy
   end
 
   private

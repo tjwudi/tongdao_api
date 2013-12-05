@@ -9,8 +9,6 @@ json.extract! @user,
 :speciality,
 :experence,
 :avatar,
-:auth_token,
 :count_of_followers,
 :count_of_followings,
-:last_auth_time,
 :last_login_time
