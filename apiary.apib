@@ -777,7 +777,7 @@ Returns a single field `state`, `state = 1` states the user can like the project
 
 
 ## Project Post Collection [/projects/{id}/project_posts/{id}]
-### Get a project post
+### Get a project post [GET]
 + Response 200 (application/json)
     + Body
 
@@ -790,10 +790,40 @@ Returns a single field `state`, `state = 1` states the user can like the project
             }
 
 
+### Update a project post [POST]
++ Request (application/json)
+  + Body
+          
+            {
+              "title": "Hello!"
+            }
 
++ Response 200 (application/json)
+  + Body
 
+            {
+             "id":7,
+             "created_at":"2013-12-03T15:36:15.373Z",
+             "updated_at":"2013-12-03T15:36:15.373Z",
+             "title":"x",
+             "content":"x"
+            }
 
+### Delete a post [DELETE]
++ Response 20
 
+## Project Featured Post [/project/{id}/project_posts/show_featured]
+### Get featured post
++ Response 200 (application/json)
+  + Body
+
+          {
+             "id":7,
+             "created_at":"2013-12-03T15:36:15.373Z",
+             "updated_at":"2013-12-03T15:36:15.373Z",
+             "title":"x",
+             "content":"x"
+          }
 
 
 
@@ -880,6 +910,70 @@ Returns a single field `state`, `state = 1` states the user can like the project
                }
             }
 
+## Project Post Comments [/projects/{id}/project_posts/{id}/project_comments{?page}]
+### List all comments in a project post [GET]
++ Parameters
+    + page (required, integer) ... page number
+
++ Response 200 (application/json)
+    + Body
+
+            [
+               {
+                  "id": 1
+                  "content":"xxx",
+                  "emotion":"zzz",
+                  "user":{
+                     "id":1,
+                     "nickname":"bEg3CSUuy",
+                     "school":"DJyZ9koy8",
+                     "gender":"Fph3n20lI",
+                     "major":"bTQV8IObN",
+                     "speciality":"AUUrPFeA1",
+                     "experence":"7TBNL9ED7",
+                     "avatar":"bHlNdQRiW",
+                     "count_of_followers":0,
+                     "count_of_followings":2
+                  }
+               }
+            ]
+
+
+### Create a project_comment in a project_post [POST]
++ Request (application/json)
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+    
+    + Body
+    
+            {
+            "content": "xxx",
+            "emotion": "jjj"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+               "id": 1, 
+               "content":"xxx",
+               "emotion":"zzz",
+               "user":{
+                  "id":1,
+                  "nickname":"bEg3CSUuy",
+                  "school":"DJyZ9koy8",
+                  "gender":"Fph3n20lI",
+                  "major":"bTQV8IObN",
+                  "speciality":"AUUrPFeA1",
+                  "experence":"7TBNL9ED7",
+                  "avatar":"bHlNdQRiW",
+                  "count_of_followers":0,
+                  "count_of_followings":2
+               }
+            }
 
 
 
