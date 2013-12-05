@@ -9,9 +9,9 @@
 
 
 User.create([
-  { id: 1, nickname: "JohnWu", encrypted_password: "abcabc", email: "webmaster@leapoahead.com", auth_token:"theusertoken", last_auth_time: DateTime.now, last_login_time: DateTime.now },
-  { id: 3, nickname: "BigTree", encrypted_password: "abcabc", email: "bigtree@leapoahead.com", auth_token:"theusertoken", last_auth_time: DateTime.now, last_login_time: DateTime.now },
-  { id: 2, nickname: "Sherry", encrypted_password: "abcabc", email: "lifeisgood@leapoahead.com", auth_token:"theusertoken", last_auth_time: DateTime.now,last_login_time: DateTime.now }
+  { id: 1, nickname: "JohnWu", encrypted_password: "abcabc", email: "webmaster@leapoahead.com",  last_login_time: DateTime.now },
+  { id: 3, nickname: "BigTree", encrypted_password: "abcabc", email: "bigtree@leapoahead.com",  last_login_time: DateTime.now },
+  { id: 2, nickname: "Sherry", encrypted_password: "abcabc", email: "lifeisgood@leapoahead.com" ,last_login_time: DateTime.now }
 ])
 
 User.find(1).follow_user!(User.find(2))

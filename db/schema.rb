@@ -149,10 +149,8 @@ ActiveRecord::Schema.define(version: 20131204150410) do
     t.string   "speciality"
     t.string   "experence"
     t.string   "avatar"
-    t.string   "auth_token"
     t.integer  "count_of_followers",  default: 0, null: false
     t.integer  "count_of_followings", default: 0, null: false
-    t.datetime "last_auth_time"
     t.datetime "last_login_time"
     t.datetime "created_at"
     t.datetime "updated_at"
