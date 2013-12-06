@@ -637,11 +637,6 @@ Show all projects where the user with specific id has membership in them.
             ]
 
 
-<<<<<<< HEAD
-## Projects Counter [/projects/count]
-### Get the count of all projects [GET]
-auth
-=======
 ## Membership related [/projects/{id}/toggle_membership{?user_id}]
 ### Toggle membership of a user [POST]
 **Test not covered**
@@ -650,7 +645,8 @@ Only the owner of the project can call this API.
 + Parameters
   + user_id (required, integer) ... the user's id
 
-+ Request (application/json)
++ Request 
+
     + Headers
     
             AUTH_TOKEN : theusertoken
@@ -690,7 +686,6 @@ Only the owner of the project can call this API.
 
 ## Projects Counter [/projects/count]
 ### Get the count of all projects [GET]
->>>>>>> e2e77a326c34a4ec9975460cec9895ab96c88ba4
 + Response 200
     + Body
 
