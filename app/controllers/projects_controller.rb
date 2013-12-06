@@ -1,6 +1,10 @@
 class ProjectsController < ApplicationController
   skip_before_action :authenticate, :only => [:index, :show, :count]
+<<<<<<< HEAD
   before_action :owner_auth, :only => [:destroy, :update]
+=======
+  before_action :owner_auth, :only => [:destroy, :update, :toggle_membership]
+>>>>>>> e2e77a326c34a4ec9975460cec9895ab96c88ba4
 
 
   def index 
@@ -115,6 +119,20 @@ class ProjectsController < ApplicationController
     render "shared/state"
   end
 
+<<<<<<< HEAD
+=======
+  def toggle_membership
+    @project = Project.find(params[:id])
+    @user = User.find(params[:user_id])
+
+    unless @user.nil? || @project.nil?
+      @project.toggle_membership!(@user)
+    end
+
+    render "projects/show"
+  end
+
+>>>>>>> e2e77a326c34a4ec9975460cec9895ab96c88ba4
   private
   def get_like_state(current_user_cache, target_project)
     return current_user_cache.likes?(target_project) ? 0 : 1

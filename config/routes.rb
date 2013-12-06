@@ -51,6 +51,10 @@ TongdaoApi::Application.routes.draw do
     member do
       post 'toggle_like' 
       get 'state_like'
+<<<<<<< HEAD
+=======
+      post 'toggle_membership'
+>>>>>>> e2e77a326c34a4ec9975460cec9895ab96c88ba4
     end
   end
 
