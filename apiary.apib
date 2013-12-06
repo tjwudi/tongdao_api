@@ -1,0 +1,1112 @@
+FORMAT: 1A
+HOST: http://apis.tongdao.in
+
+# TongDao v1.0
+The backend apis document of tongdao.in.
+
+# Group Users
+## Users Collection [/users{?auto_complete_word, count}]
+### List users [GET]
+Only list user's open information.  
+This API only works for project member invitation page. 
++ Parameters 
+    + auto_complete_word (required, string) ... key word for auto completion
+    + count (required, string)
+
++ Request 
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
++ Response 200
+    + Body
+    
+            [
+               {
+                  "id":1,
+                  "nickname":"V2w4FZieQ",
+                  "school":"MJKLD7IbA",
+                  "major":"kydNwpAVr",
+                  "speciality":"F6la7sX0k",
+                  "experence":"3E4pnHSbK",
+                  "avatar":"q24nzgQ99",
+                  "count_of_followers":0,
+                  "count_of_followings":2
+               },
+               {
+                  "id":5,
+                  "nickname":"V5JBfpe",
+                  "school":null,
+                  "major":null,
+                  "speciality":null,
+                  "experence":null,
+                  "avatar":null,
+                  "count_of_followers":0,
+                  "count_of_followings":0
+               }
+            ]
+
+### Create a User [POST]
+Create a new user. 
+When error occurs, it returns HTTP 500 with an empty json array.  
+
++ Request (application/json)
+    + Body
+    
+            {
+            "nickname" : "johnwu",
+            "email" : "webmaster@leapoahead.com",
+            "encrypted_password" : "abcabc"
+            }
+
++ Response 200 (application/json)
+    + Body 
+    
+            {
+               "id":16,
+               "email":"webmaster@sina.com",
+               "nickname":"johnx",
+               "gender":null,
+               "contact":null,
+               "school":null,
+               "major":null,
+               "speciality":null,
+               "experence":null,
+               "avatar":null,
+               "count_of_followers":0,
+               "count_of_followings":0,
+               "last_login_time":null
+            }
+
+## User Collection [/users/{id}]
+
++ Parameters 
+    + id(string, required) ... The user id
+
+### Update user information [PATCH]
+Pass the information you want to change as key-value pair. The key can be following fields in `User` model:
+
+- `nickname`
+- `gender`
+- `contact`
+- `school`
+- `speciality`
+- `avatar`
+- `experences`
+- `major`
+
+
+HTTP 500 when error occurs (like duplication in `nickname` field)
+
++ Request (application/json)
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+            
+    + Body
+
+            {
+            "encrypted_password": "aaaaaa"
+            }
+
++ Response 200
+    + Body
+
+            {
+            "id": 2,
+            "email": "lifeisgood@leapoahead.com",
+            "nickname": "Sherry",
+            "gender": null,
+            "school": null,
+            "major": null,
+            "speciality": null,
+            "experence": null,
+            "avatar": null,
+            "count_of_followers": 1,
+            "count_of_followings": 0,
+            "last_login_time": "2013-11-29T14:20:48.000Z",
+            "created_at": "2013-11-29T14:20:48.000Z",
+            "updated_at": "2013-11-29T14:20:57.000Z"
+            }
+
+## Users Counter Collection [/users/count]
+### Get the count of all users [GET]
++ Response 200 (application/json)
+    + Body
+
+            {
+            "count": 402000
+            }
+
+## User follow [/users/{id}/toggle_follow]
+### Follow/unfollow a user [POST]
+Returns a status code (see Get the follow ship [GET] below)
++ Request (application/json)
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
+    + Body
+    
+            {
+                "state": 2
+            }
+
++ Response 200
+
+
+## User followship status [/users/{id}/followship]
+### Get the follow ship [GET]
+returns a single field `status`.  
+when `status = 0` mean they don't follow each other neither, when `status = 1` means the current user followed the user with {id}, when `status = 2` means the user with {id} followed the current user, when `status = 3` means they followed each other.
+when the user {id} is current user itself, return HTTP 500 error.
++ Request 
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
+
++ Response 200
+    + Body
+    
+            {
+                "state": 2
+            }
+
+## User followers list [/users/{id}/followers{?page}]
+### Get the list of followers [GET]
++ Parameters
+    + page(optional, string)
+
++ Response 200
+    + Body
+
+            [
+               {
+                  "id":1,
+                  "nickname":"V2w4FZieQ",
+                  "school":"MJKLD7IbA",
+                  "major":"kydNwpAVr",
+                  "speciality":"F6la7sX0k",
+                  "experence":"3E4pnHSbK",
+                  "avatar":"q24nzgQ99",
+                  "count_of_followers":0,
+                  "count_of_followings":2
+               },
+               {
+                  "id":5,
+                  "nickname":"V5JBfpe",
+                  "school":null,
+                  "major":null,
+                  "speciality":null,
+                  "experence":null,
+                  "avatar":null,
+                  "count_of_followers":0,
+                  "count_of_followings":0
+               }
+            ]
+
+
+## User followings list [/users/{id}/followings{?page}]
+### Get the list of followings [GET]
++ Parameters
+    + page(optional, string)
+
++ Response 200
+    + Body
+
+            [
+               {
+                  "id":1,
+                  "nickname":"V2w4FZieQ",
+                  "school":"MJKLD7IbA",
+                  "major":"kydNwpAVr",
+                  "speciality":"F6la7sX0k",
+                  "experence":"3E4pnHSbK",
+                  "avatar":"q24nzgQ99",
+                  "count_of_followers":0,
+                  "count_of_followings":2
+               },
+               {
+                  "id":5,
+                  "nickname":"V5JBfpe",
+                  "school":null,
+                  "major":null,
+                  "speciality":null,
+                  "experence":null,
+                  "avatar":null,
+                  "count_of_followers":0,
+                  "count_of_followings":0
+               }
+            ]
+
+
+
+
+## Pending Users Collection [/pending_users]
+### Create a pending user [POST]
+Create a new pending user. A pending user is **unactived** user, who just provided his/her email for activation.  
+Returns the pending user object.  
+If any error occurs (duplicated email field), response it with HTTP 500 error.
+
++ Request (application/json)
+    + Body
+    
+            {
+            "email": "webmaster@leapoahead.com"
+            }
+
++ Response 200 (application/json)
+    + Body
+    
+            {
+            "id":4,
+            "email":"webmaster@leapoahead.com"
+            }
+
+## Pending user collection [/pending_users/{id}]
+### Delete a pending user [DELETE]
+Just ... Destroy it. Returns HTTP 500 when failed.
+
++ Response 200 (application/json)
+    + Body
+
+            []
+
+## Pending Users Existance Checker [/pending_user/exist{?email}]
+### Get count of pending users meets the criterias [GET]
+Query for the count of pending user meets the criterias provided by params. In this case, the email field.  
+Returns a json object which owns a `state` field. `state = 1` for email exists in pending users, `state = 2` for email exists for current users, `state = 0` for all good.
+
++ Parameters
+    + email(required, string) ... user's email
+
++ Response 200 (application/json)
+    + Body
+
+            {
+            "state": 1
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Group Sessions
+## Sessions Collection [/sessions]
+### Create a new session [POST]
+Used for user login. If succeed, returns a new session.  
+HTTP 403 for failed email&password pair.
+
++ Request (application/json)
+    + Body
+        
+            {
+            "email": "webmaster@leapoahead.com",
+            "encrypted_password": "abcabc"
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+            "token": "theusertoken", 
+            "id": 123
+            }
+
+## Session Collection [/sessions/{id}]
+
++ Parameters 
+    + id(string, required) ... The token id
+    
+### Destroy a session [DELETE]
+HTTP 401 when unauthorized, HTTP 500 when unknown error.
++ Request 
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
++ Response 200
+    + Body
+
+            []
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Group Projects
+## Projects Collection [/projects{?page, tags, per_page}]
+### Get projects list [GET]
+Get projects information.
+per_page: 15  
+
++ Parameters
+    + tag(optional, comma splited string) ... tag name
+    + page(optional, integer) ... page
+    + per_page(optional, integer) ... count per page
+
++ Response 200 (application/json)
+    + Body 
+
+            [
+               {
+                  "id":14,
+                  "title":"同济大学 u6EOPyzio",
+                  "school":"duycff University",
+                  "state":"Wanting!",
+                  "count_of_likes":0,
+                  "count_of_views":0,
+                  "created_at":"2013-12-03T02:53:32.000Z",
+                  "updated_at":"2013-12-03T02:53:32.000Z",
+                  "tags":[
+                     {
+                        "name":"School"
+                     },
+                     {
+                        "name":"Cooking"
+                     },
+                     {
+                        "name":"c0zpt"
+                     }
+                  ],
+                  "members":[
+                     {
+                        "id":1,
+                        "nickname":"8iEvVl7qu",
+                        "school":"xKMEHvHCt",
+                        "gender":"JDgU6mMqM",
+                        "major":"RiqHysSw5",
+                        "speciality":"YAMOdoPrK",
+                        "experence":"49GaNEi4c",
+                        "avatar":"S0vCuH6Wg",
+                        "count_of_followers":0,
+                        "count_of_followings":2
+                     }
+                  ]
+               }
+            ]
+
+### Create a new project [POST]
+Create a new project and set current user as one of the owners. 
++ Request (application/json)
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+    
+    + Body
+    
+            {
+                "title": "校园绿化项目",
+                "tags": [{"name":"School"},{"name":"Cooking"}],
+                "school": "同济大学",
+                "state": "招人中"
+            }
+
++ Response 200
+            
+           {
+              "id":14,
+              "title":"同济大学 u6EOPyzio",
+              "school":"duycff University",
+              "state":"Wanting!",
+              "count_of_likes":0,
+              "count_of_views":0,
+              "created_at":"2013-12-03T02:53:32.000Z",
+              "updated_at":"2013-12-03T02:53:32.000Z",
+              "tags":[
+                 {
+                    "name":"School"
+                 }
+              ],
+              "members":[
+                 {
+                    "id":1,
+                    "nickname":"8iEvVl7qu",
+                    "school":"xKMEHvHCt",
+                    "gender":"JDgU6mMqM",
+                    "major":"RiqHysSw5",
+                    "speciality":"YAMOdoPrK",
+                    "experence":"49GaNEi4c",
+                    "avatar":"S0vCuH6Wg",
+                    "count_of_followers":0,
+                    "count_of_followings":2
+                 }
+              ]
+           }
+
+## Project Collection [/projects/{id}]
+### Get a project's information [GET]
++ Response 200
+    + Body
+
+            {
+              "id":14,
+              "title":"同济大学 u6EOPyzio",
+              "school":"duycff University",
+              "state":"Wanting!",
+              "count_of_likes":0,
+              "count_of_views":0,
+              "created_at":"2013-12-03T02:53:32.000Z",
+              "updated_at":"2013-12-03T02:53:32.000Z",
+              "tags":[
+                 {
+                    "name":"School"
+                 }
+              ],
+              "members":[
+                 {
+                    "id":1,
+                    "nickname":"8iEvVl7qu",
+                    "school":"xKMEHvHCt",
+                    "gender":"JDgU6mMqM",
+                    "major":"RiqHysSw5",
+                    "speciality":"YAMOdoPrK",
+                    "experence":"49GaNEi4c",
+                    "avatar":"S0vCuH6Wg",
+                    "count_of_followers":0,
+                    "count_of_followings":2
+                 }
+              ]
+            }
+            
+### Update a project's information [PATCH]
+Update project information. All fields in the `Project` model is avaliable.  
+The user should be the one of the owners of the project or he/she will get 401 Error.  
+
++ Request (application/json)
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
+    + Body
+
+            {
+                "title": "校园绿化项目",
+                "tags": [{"name":"School"}],
+                "school": "同济大学",
+                "state": "招人中"
+            }
+
++ Response 200
+
+           {
+              "id":14,
+              "title":"同济大学 u6EOPyzio",
+              "school":"duycff University",
+              "state":"Wanting!",
+              "count_of_likes":0,
+              "count_of_views":0,
+              "created_at":"2013-12-03T02:53:32.000Z",
+              "updated_at":"2013-12-03T02:53:32.000Z",
+              "tags":[
+                 {
+                    "name":"School"
+                 }
+              ],
+              "members":[
+                 {
+                    "id":1,
+                    "nickname":"8iEvVl7qu",
+                    "school":"xKMEHvHCt",
+                    "gender":"JDgU6mMqM",
+                    "major":"RiqHysSw5",
+                    "speciality":"YAMOdoPrK",
+                    "experence":"49GaNEi4c",
+                    "avatar":"S0vCuH6Wg",
+                    "count_of_followers":0,
+                    "count_of_followings":2
+                 }
+              ]
+           }
+
+### DELETE A PROJECT [DELETE]
+Only owners can delete the project. HTTP 500 when error occurs.
++ Request 
+
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
++ Response 200
+
+
+## User Projects Collection [/users/{id}/projects{?page, per_page}]
+### Show user's projects [GET]
+Show all projects where the user with specific id has membership in them.   
++ Parameters
+    + page (optional, integer) ... page
+    + per_page(optional, integer) ... count per page
+
++ Response 200
+    
+    + Body
+    
+            [
+            {
+              "id":14,
+              "title":"同济大学 u6EOPyzio",
+              "school":"duycff University",
+              "state":"Wanting!",
+              "count_of_likes":0,
+              "count_of_views":0,
+              "created_at":"2013-12-03T02:53:32.000Z",
+              "updated_at":"2013-12-03T02:53:32.000Z",
+              "tags":[
+                 {
+                    "name":"School"
+                 }
+              ],
+              "members":[
+                 {
+                    "id":1,
+                    "nickname":"8iEvVl7qu",
+                    "school":"xKMEHvHCt",
+                    "gender":"JDgU6mMqM",
+                    "major":"RiqHysSw5",
+                    "speciality":"YAMOdoPrK",
+                    "experence":"49GaNEi4c",
+                    "avatar":"S0vCuH6Wg",
+                    "count_of_followers":0,
+                    "count_of_followings":2
+                 }
+              ]
+            }
+            ]
+
+
+## Membership related [/projects/{id}/toggle_membership{?user_id}]
+### Toggle membership of a user [POST]
+**Test not covered**
+Only the owner of the project can call this API.
+
++ Parameters
+  + user_id (required, integer) ... the user's id
+
++ Request (application/json)
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
++ Response 200 (application/json)
+
+            {
+              "id":14,
+              "title":"同济大学 u6EOPyzio",
+              "school":"duycff University",
+              "state":"Wanting!",
+              "count_of_likes":0,
+              "count_of_views":0,
+              "created_at":"2013-12-03T02:53:32.000Z",
+              "updated_at":"2013-12-03T02:53:32.000Z",
+              "tags":[
+                 {
+                    "name":"School"
+                 }
+              ],
+              "members":[
+                 {
+                    "id":1,
+                    "nickname":"8iEvVl7qu",
+                    "school":"xKMEHvHCt",
+                    "gender":"JDgU6mMqM",
+                    "major":"RiqHysSw5",
+                    "speciality":"YAMOdoPrK",
+                    "experence":"49GaNEi4c",
+                    "avatar":"S0vCuH6Wg",
+                    "count_of_followers":0,
+                    "count_of_followings":2
+                 }
+              ]
+            }
+
+## Projects Counter [/projects/count]
+### Get the count of all projects [GET]
++ Response 200
+    + Body
+
+            {
+            "count": 4994812
+            }
+
+
+
+## Project Like [/projects/{id}/toggle_like]
+### Like/Dislike the project [POST]
+Returns a status code (see the section below).
++ Request 
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
+    + Body
+
+            {
+                state: 1
+            }
+
++ Response 200
+
+
+## Project Like Status Check [/projects/{id}/state_like]
+### Check whether the user can like the project (get the state of user like) [GET]
+Returns a single field `state`, `state = 1` states the user can like the project (hasn't been liked yet!), `state = 0` otherwise.
++ Request 
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
++ Response 200
+    + Body
+
+            {
+                state: 0
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Group Tags
+## Tags Collection [/tags{?auto_complete_word, count, match}]
+### Get Tags Information [GET]
++ Parameters
+    + auto_complete_word
+    + count
+    + match(optional, integer) ... if `match` is 1, then the word must just match the auto_complete_word
+
++ Response 200
+    + Body
+
+            [ { 
+                "id" : 5,
+                "name" : "xx3"
+              },
+              { 
+                "id" : 6,
+                "name" : "xx2"
+              }
+            ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Group Project Posts 
+## Project Posts Collection [/projects/{id}/project_posts{?page}]
+### List all posts in a project [GET]
++ Parameters
+    + page (required, integer) ... page number
+
++ Response 200 (application/json)
+    + Body
+
+            [
+               {
+                  "id":1,
+                  "created_at":"2013-12-03T06:56:53.000Z",
+                  "updated_at":"2013-12-03T06:56:53.000Z",
+                  "title":"jtXPo7GH26",
+                  "content":"dYol0q4W"
+               }
+            ]
+
+
+### Create project post [POST]
++ Request (application/json)
+    + Body
+
+            {
+                  "title":"x",
+                  "content":"x"
+            }
+
+
++ Response 200 (application/json)
+    + Body
+
+            {
+               "id":7,
+               "created_at":"2013-12-03T15:36:15.373Z",
+               "updated_at":"2013-12-03T15:36:15.373Z",
+               "title":"x",
+               "content":"x"
+            }
+
+
+## Project Post Collection [/projects/{id}/project_posts/{id}]
+### Get a project post [GET]
++ Response 200 (application/json)
+    + Body
+
+            {
+               "id":7,
+               "created_at":"2013-12-03T15:36:15.373Z",
+               "updated_at":"2013-12-03T15:36:15.373Z",
+               "title":"x",
+               "content":"x"
+            }
+
+
+### Update a project post [POST]
++ Request (application/json)
+  + Body
+          
+            {
+              "title": "Hello!"
+            }
+
++ Response 200 (application/json)
+  + Body
+
+            {
+             "id":7,
+             "created_at":"2013-12-03T15:36:15.373Z",
+             "updated_at":"2013-12-03T15:36:15.373Z",
+             "title":"x",
+             "content":"x"
+            }
+
+### Delete a post [DELETE]
++ Response 20
+
+## Project Featured Post [/project/{id}/project_posts/show_featured]
+### Get featured post
++ Response 200 (application/json)
+  + Body
+
+          {
+             "id":7,
+             "created_at":"2013-12-03T15:36:15.373Z",
+             "updated_at":"2013-12-03T15:36:15.373Z",
+             "title":"x",
+             "content":"x"
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Group Project Comments
+## Project Comments [/projects/{id}/project_comments{?page}]
+### List all comments in a project [GET]
++ Parameters
+    + page (required, integer) ... page number
+
++ Response 200 (application/json)
+    + Body
+
+            [
+               {
+                  "id": 1
+                  "content":"xxx",
+                  "emotion":"zzz",
+                  "user":{
+                     "id":1,
+                     "nickname":"bEg3CSUuy",
+                     "school":"DJyZ9koy8",
+                     "gender":"Fph3n20lI",
+                     "major":"bTQV8IObN",
+                     "speciality":"AUUrPFeA1",
+                     "experence":"7TBNL9ED7",
+                     "avatar":"bHlNdQRiW",
+                     "count_of_followers":0,
+                     "count_of_followings":2
+                  }
+               }
+            ]
+
+
+### Create a project_comment [POST]
++ Request (application/json)
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+    
+    + Body
+    
+            {
+            "content": "xxx",
+            "emotion": "jjj"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+               "id": 1, 
+               "content":"xxx",
+               "emotion":"zzz",
+               "user":{
+                  "id":1,
+                  "nickname":"bEg3CSUuy",
+                  "school":"DJyZ9koy8",
+                  "gender":"Fph3n20lI",
+                  "major":"bTQV8IObN",
+                  "speciality":"AUUrPFeA1",
+                  "experence":"7TBNL9ED7",
+                  "avatar":"bHlNdQRiW",
+                  "count_of_followers":0,
+                  "count_of_followings":2
+               }
+            }
+
+## Project Post Comments [/projects/{id}/project_posts/{id}/project_comments{?page}]
+### List all comments in a project post [GET]
++ Parameters
+    + page (required, integer) ... page number
+
++ Response 200 (application/json)
+    + Body
+
+            [
+               {
+                  "id": 1
+                  "content":"xxx",
+                  "emotion":"zzz",
+                  "user":{
+                     "id":1,
+                     "nickname":"bEg3CSUuy",
+                     "school":"DJyZ9koy8",
+                     "gender":"Fph3n20lI",
+                     "major":"bTQV8IObN",
+                     "speciality":"AUUrPFeA1",
+                     "experence":"7TBNL9ED7",
+                     "avatar":"bHlNdQRiW",
+                     "count_of_followers":0,
+                     "count_of_followings":2
+                  }
+               }
+            ]
+
+
+### Create a project_comment in a project_post [POST]
++ Request (application/json)
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+    
+    + Body
+    
+            {
+            "content": "xxx",
+            "emotion": "jjj"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+               "id": 1, 
+               "content":"xxx",
+               "emotion":"zzz",
+               "user":{
+                  "id":1,
+                  "nickname":"bEg3CSUuy",
+                  "school":"DJyZ9koy8",
+                  "gender":"Fph3n20lI",
+                  "major":"bTQV8IObN",
+                  "speciality":"AUUrPFeA1",
+                  "experence":"7TBNL9ED7",
+                  "avatar":"bHlNdQRiW",
+                  "count_of_followers":0,
+                  "count_of_followings":2
+               }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Group Public Acitivites
+## User followings public activities collection [/public_activities{?page}]
+### Get public activities [GET]
++ Parameters 
+    + page(optional, string)
+
++ Request 
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
++ Response 200
+    + Body
+
+            [{
+              "id": 2,
+              "user": {
+                "id":1,
+                "nickname":"V2w4FZieQ",
+                "school":"MJKLD7IbA",
+                "major":"kydNwpAVr",
+                "speciality":"F6la7sX0k",
+                "experence":"3E4pnHSbK",
+                "avatar":"q24nzgQ99",
+                "count_of_followers":0,
+                "count_of_followings":2
+              },
+              "data": "fuck~~~",
+              "created_at": "2013-11-29T15:34:56.000Z",
+              "updated_at": "2013-11-29T15:35:07.000Z"
+            }]
+
+## User Public Activities collection [/users/{id}/public_activities{?page}]
+### Get user's public activities [GET]
++ Parameters 
+    + page(optional, string)
+
++ Request 
+    + Headers
+    
+            AUTH_TOKEN : theusertoken
+            AUTH_EMAIL : webmaster@leapoahead.com
+
++ Response 200
+    + Body
+
+            [{
+              "id": 2,
+              "user": {
+                "id":1,
+                "nickname":"V2w4FZieQ",
+                "school":"MJKLD7IbA",
+                "major":"kydNwpAVr",
+                "speciality":"F6la7sX0k",
+                "experence":"3E4pnHSbK",
+                "avatar":"q24nzgQ99",
+                "count_of_followers":0,
+                "count_of_followings":2
+              },
+              "data": "fuck~~~",
+              "created_at": "2013-11-29T15:34:56.000Z",
+              "updated_at": "2013-11-29T15:35:07.000Z"
+            }]
