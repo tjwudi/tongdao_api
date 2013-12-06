@@ -23,8 +23,6 @@ class Project < ActiveRecord::Base
   validates :school, presence: true
   validates :state, presence: true
 
-<<<<<<< HEAD
-=======
   def toggle_membership!(user)
     membership = self.memberships.where(:user_id => user.id)
     
@@ -36,5 +34,4 @@ class Project < ActiveRecord::Base
     self.save
     self.reload
   end
->>>>>>> e2e77a326c34a4ec9975460cec9895ab96c88ba4
 end

@@ -1,10 +1,6 @@
 class ProjectsController < ApplicationController
   skip_before_action :authenticate, :only => [:index, :show, :count]
-<<<<<<< HEAD
-  before_action :owner_auth, :only => [:destroy, :update]
-=======
   before_action :owner_auth, :only => [:destroy, :update, :toggle_membership]
->>>>>>> e2e77a326c34a4ec9975460cec9895ab96c88ba4
 
 
   def index 
