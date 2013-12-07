@@ -9,6 +9,8 @@ class ProjectCommentsController < ApplicationController
       @project = Project.find(params["project_id"])
       @project_comments = @project.project_comments
     end
+    
+    @project_comments = @project_comments.page(params[:page])
 
     render "project_comments/index"
   end

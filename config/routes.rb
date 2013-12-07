@@ -34,6 +34,9 @@ TongdaoApi::Application.routes.draw do
     end
   end
 
+  resources :messages, :only => [:index] do
+  end
+
   resources :projects, :defaults => { format: :json } do
     resources :project_comments, :only => [:index, :create]
     resources :project_posts, :only => [:index, :show, :create, :destroy, :update] do
