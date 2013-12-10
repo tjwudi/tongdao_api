@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131210060603) do
+ActiveRecord::Schema.define(version: 20131210061649) do
+
+  create_table "conversations", force: true do |t|
+    t.integer  "user_alpha_id"
+    t.integer  "user_beta_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "follows", force: true do |t|
     t.string   "follower_type"
@@ -108,6 +115,13 @@ ActiveRecord::Schema.define(version: 20131210060603) do
   create_table "public_activities", force: true do |t|
     t.integer  "user_id"
     t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "receipts", force: true do |t|
+    t.text     "content"
+    t.integer  "sender_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

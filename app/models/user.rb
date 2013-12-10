@@ -19,6 +19,12 @@ class User < ActiveRecord::Base
   has_many :public_activities
 
   has_many :tokens, dependent: :destroy
+
+  has_many :conversations_alpha, :class_name => 'Conversation', :foreign_key => 'user_alpha_id'
+  has_many :conversations_beta,  :class_name => 'Conversation', :foreign_key => 'user_beta_id'
+  def conversations
+    conversations_alpha << conversations_beta
+  end
   
   def self.per_page
     return 15
