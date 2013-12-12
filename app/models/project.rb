@@ -28,7 +28,7 @@ class Project < ActiveRecord::Base
     
     if membership.count == 0
       self.users << user
-    elsif membership.is_owner == false
+    elsif membership.first.is_owner == false
       self.users.delete(user)
     end
     self.save
