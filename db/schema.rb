@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131210061649) do
+ActiveRecord::Schema.define(version: 20131212030226) do
 
   create_table "conversations", force: true do |t|
     t.integer  "user_alpha_id"
     t.integer  "user_beta_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "user_alpha_is_read"
+    t.boolean  "user_beta_is_read"
   end
 
   create_table "follows", force: true do |t|
@@ -63,6 +65,15 @@ ActiveRecord::Schema.define(version: 20131210061649) do
 
   add_index "mentions", ["mentionable_id", "mentionable_type"], name: "fk_mentionables", using: :btree
   add_index "mentions", ["mentioner_id", "mentioner_type"], name: "fk_mentions", using: :btree
+
+  create_table "organizations", force: true do |t|
+    t.string   "name"
+    t.text     "introduction"
+    t.string   "avatar"
+    t.integer  "administrator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pending_users", force: true do |t|
     t.string   "email",      null: false
@@ -168,6 +179,7 @@ ActiveRecord::Schema.define(version: 20131210061649) do
     t.datetime "last_login_time"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "organization_id"
   end
 
   add_index "users", ["nickname"], name: "index_users_on_nickname", unique: true, using: :btree

@@ -20,6 +20,7 @@ class ProjectsController < ApplicationController
     render "projects/index"
   end
 
+
   def show
     @project = Project.find(params[:id])
     @project.count_of_views = @project.count_of_views + 1
@@ -27,6 +28,7 @@ class ProjectsController < ApplicationController
 
     render "projects/show"
   end
+
 
   def create
     if (@project = Project.create(params.except(:tags).permit(:title, :school, :state, :summary, :feature_photo))).valid?
@@ -61,6 +63,7 @@ class ProjectsController < ApplicationController
     end
   end
 
+
   def update
     @project = Project.find(params[:id])
 
@@ -87,6 +90,7 @@ class ProjectsController < ApplicationController
     render "projects/show"
   end
 
+
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
@@ -94,11 +98,13 @@ class ProjectsController < ApplicationController
     return render_blank
   end
 
+
   def count
     @count = Project.all.count
 
     render "shared/count"
   end
+
 
   def toggle_like
     @project = Project.find(params[:id]);
@@ -109,11 +115,13 @@ class ProjectsController < ApplicationController
     render "shared/state"
   end
 
+
   def state_like
     @state = get_like_state(current_user, Project.find(params[:id]))
 
     render "shared/state"
   end
+
 
   def toggle_membership
     @project = Project.find(params[:id])
@@ -126,10 +134,13 @@ class ProjectsController < ApplicationController
     render "projects/show"
   end
 
+
   private
+  
   def get_like_state(current_user_cache, target_project)
     return current_user_cache.likes?(target_project) ? 0 : 1
   end
+
 
   def owner_auth
     membership = Membership.find_by(user_id: current_user.id, project_id: params[:id])

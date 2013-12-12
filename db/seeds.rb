@@ -56,6 +56,3 @@ TagAttachment.create([
   { tag_id: 2, project_id: 1 }
 ])
 
-u1 = User.find 1
-u2 = User.find 2
-u1.send_message(u2, "Hello, I am u1", "Greeting!")
