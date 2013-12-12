@@ -21,8 +21,8 @@ This API only works for project member invitation page.
 
 + Response 200
     + Body
-    
-            [
+            {
+            data: [
                {
                   "id":1,
                   "nickname":"V2w4FZieQ",
@@ -46,6 +46,7 @@ This API only works for project member invitation page.
                   "count_of_followings":0
                }
             ]
+            }
 
 ### Create a User [POST]
 Create a new user. 
@@ -185,7 +186,8 @@ when the user {id} is current user itself, return HTTP 500 error.
 + Response 200
     + Body
 
-            [
+            {
+            data: [
                {
                   "id":1,
                   "nickname":"V2w4FZieQ",
@@ -208,7 +210,9 @@ when the user {id} is current user itself, return HTTP 500 error.
                   "count_of_followers":0,
                   "count_of_followings":0
                }
-            ]
+            ],
+            total_pages: 15
+            }
 
 
 ## User followings list [/users/{id}/followings{?page}]
@@ -219,7 +223,8 @@ when the user {id} is current user itself, return HTTP 500 error.
 + Response 200
     + Body
 
-            [
+            {
+            data: [
                {
                   "id":1,
                   "nickname":"V2w4FZieQ",
@@ -242,8 +247,9 @@ when the user {id} is current user itself, return HTTP 500 error.
                   "count_of_followers":0,
                   "count_of_followings":0
                }
-            ]
-
+            ],
+            total_pages: 10
+            }
 
 
 
@@ -407,8 +413,9 @@ per_page: 15
 
 + Response 200 (application/json)
     + Body 
-
-            [
+          
+            {
+            data: [
                {
                   "id":14,
                   "title":"同济大学 u6EOPyzio",
@@ -444,7 +451,9 @@ per_page: 15
                      }
                   ]
                }
-            ]
+            ],
+            total_pages: 100
+            }
 
 ### Create a new project [POST]
 Create a new project and set current user as one of the owners. 
@@ -604,7 +613,8 @@ Show all projects where the user with specific id has membership in them.
     
     + Body
     
-            [
+            {
+            data: [
             {
               "id":14,
               "title":"同济大学 u6EOPyzio",
@@ -634,16 +644,14 @@ Show all projects where the user with specific id has membership in them.
                  }
               ]
             }
-            ]
+            ],
+            total_pages: 100
+            }
 
 
-## Membership related [/projects/{id}/toggle_membership{?user_id}]
+## Membership related [/projects/{id}/toggle_membership]
 ### Toggle membership of a user [POST]
-**Test not covered**
 Only the owner of the project can call this API.
-
-+ Parameters
-  + user_id (required, integer) ... the user's id
 
 + Request 
 
@@ -651,6 +659,11 @@ Only the owner of the project can call this API.
     
             AUTH_TOKEN : theusertoken
             AUTH_EMAIL : webmaster@leapoahead.com
+
+    + Body 
+            {
+            "user_id": 2
+            }
 
 + Response 200 (application/json)
 
@@ -670,7 +683,7 @@ Only the owner of the project can call this API.
               ],
               "members":[
                  {
-                    "id":1,
+                    "id":2,
                     "nickname":"8iEvVl7qu",
                     "school":"xKMEHvHCt",
                     "gender":"JDgU6mMqM",
@@ -745,6 +758,12 @@ Returns a single field `state`, `state = 1` states the user can like the project
 
 
 
+
+
+
+
+
+
 # Group Tags
 ## Tags Collection [/tags{?auto_complete_word, count, match}]
 ### Get Tags Information [GET]
@@ -755,8 +774,8 @@ Returns a single field `state`, `state = 1` states the user can like the project
 
 + Response 200
     + Body
-
-            [ { 
+            {
+            data: [ { 
                 "id" : 5,
                 "name" : "xx3"
               },
@@ -765,7 +784,7 @@ Returns a single field `state`, `state = 1` states the user can like the project
                 "name" : "xx2"
               }
             ]
-
+            }
 
 
 
@@ -789,7 +808,8 @@ Returns a single field `state`, `state = 1` states the user can like the project
 + Response 200 (application/json)
     + Body
 
-            [
+            {
+            data: [
                {
                   "id":1,
                   "created_at":"2013-12-03T06:56:53.000Z",
@@ -797,7 +817,9 @@ Returns a single field `state`, `state = 1` states the user can like the project
                   "title":"jtXPo7GH26",
                   "content":"dYol0q4W"
                }
-            ]
+            ],
+            total_pages: 10
+            }
 
 
 ### Create project post [POST]
@@ -899,7 +921,8 @@ Returns a single field `state`, `state = 1` states the user can like the project
 + Response 200 (application/json)
     + Body
 
-            [
+            {
+            data: [
                {
                   "id": 1
                   "content":"xxx",
@@ -917,8 +940,9 @@ Returns a single field `state`, `state = 1` states the user can like the project
                      "count_of_followings":2
                   }
                }
-            ]
-
+            ],
+            total_pages: 100
+            }
 
 ### Create a project_comment [POST]
 + Request (application/json)
@@ -964,7 +988,8 @@ Returns a single field `state`, `state = 1` states the user can like the project
 + Response 200 (application/json)
     + Body
 
-            [
+            {
+            data: [
                {
                   "id": 1
                   "content":"xxx",
@@ -982,7 +1007,9 @@ Returns a single field `state`, `state = 1` states the user can like the project
                      "count_of_followings":2
                   }
                }
-            ]
+            ],
+            total_pages: 1
+            }
 
 
 ### Create a project_comment in a project_post [POST]
