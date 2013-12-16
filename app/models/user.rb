@@ -20,11 +20,7 @@ class User < ActiveRecord::Base
 
   has_many :tokens, dependent: :destroy
 
-  has_many :conversations_alpha, :class_name => 'Conversation', :foreign_key => 'user_alpha_id'
-  has_many :conversations_beta,  :class_name => 'Conversation', :foreign_key => 'user_beta_id'
-  def conversations
-    conversations_alpha << conversations_beta
-  end
+  has_many :conversations
   
   def self.per_page
     return 15
@@ -52,6 +48,20 @@ class User < ActiveRecord::Base
     user.count_of_followers = user.count_of_followers - 1
     user.save
     self.save
+  end
+
+  def send_message(user, content)
+    receipt = Receipt.create(:sender => self, :content => content)
+  
+    User.find_conversation(self, user, true).receipts << receipt
+    User.find_conversation(user, self, false).receipts << receipt
+  end
+
+  def self.find_conversation(owner, user_opp, is_read)
+    if !owner.conversations.exists?(:user_opp => user_opp)
+      return Conversation.create(:user => owner, :is_read => is_read, :user_opp => user_opp)
+    end
+    return owner.conversations.find_by(:user_opp => user_opp)
   end
 
   def deauthorize

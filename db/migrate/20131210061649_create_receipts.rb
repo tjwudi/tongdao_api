@@ -3,6 +3,7 @@ class CreateReceipts < ActiveRecord::Migration
     create_table :receipts do |t|
       t.text :content
       t.references :sender
+      t.references :conversation
 
       t.timestamps
     end

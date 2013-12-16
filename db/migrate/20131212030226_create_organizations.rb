@@ -14,7 +14,7 @@ class CreateOrganizations < ActiveRecord::Migration
   end
 
   def down
-    drop_table :organizations do end
-    remove_column :users, :organization
+    remove_column :users, :organization_id
+    drop_table :organizations 
   end
 end

@@ -14,12 +14,11 @@
 ActiveRecord::Schema.define(version: 20131212030226) do
 
   create_table "conversations", force: true do |t|
-    t.integer  "user_alpha_id"
-    t.integer  "user_beta_id"
+    t.integer  "user_id"
+    t.boolean  "is_read",     default: false
+    t.integer  "user_opp_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "user_alpha_is_read"
-    t.boolean  "user_beta_is_read"
   end
 
   create_table "follows", force: true do |t|
@@ -133,6 +132,7 @@ ActiveRecord::Schema.define(version: 20131212030226) do
   create_table "receipts", force: true do |t|
     t.text     "content"
     t.integer  "sender_id"
+    t.integer  "conversation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
