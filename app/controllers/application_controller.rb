@@ -4,6 +4,9 @@ class ApplicationController < ActionController::API
   ##################################################
   # Constants
   MAX_AUTH_INTERVAL = 604800
+  ERROR_MSG = {
+    :LOGIN_FAILED => "Login failed, wrong password or email"
+  }
   
 
   ##################################################
@@ -59,6 +62,10 @@ class ApplicationController < ActionController::API
 
   def render_blank(status_code = 200)
     return render :json => [], :status => status_code
+  end
+
+  def render_error(err_code)
+    return render :json => { :err_code => err_code, :err_msg => ERROR_MSG[err_code] }, :status => 500
   end
 
   def current_user

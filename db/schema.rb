@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131212030226) do
+ActiveRecord::Schema.define(version: 20131217041554) do
 
   create_table "conversations", force: true do |t|
     t.integer  "user_id"
@@ -19,6 +19,11 @@ ActiveRecord::Schema.define(version: 20131212030226) do
     t.integer  "user_opp_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "conversations_receipts", force: true do |t|
+    t.integer "conversation_id"
+    t.integer "receipt_id"
   end
 
   create_table "follows", force: true do |t|
@@ -132,7 +137,6 @@ ActiveRecord::Schema.define(version: 20131212030226) do
   create_table "receipts", force: true do |t|
     t.text     "content"
     t.integer  "sender_id"
-    t.integer  "conversation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

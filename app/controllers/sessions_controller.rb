@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       
       render "tokens/show"
     else
-      return render_blank(403)
+      return render_error(:LOGIN_FAILED)
     end
   end
 

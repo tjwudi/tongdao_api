@@ -31,6 +31,9 @@ TongdaoApi::Application.routes.draw do
       get 'followers'
       get 'followings'
       get 'public_activities' => 'public_activities#user_public_activities'
+      post 'messages' => 'messages#create'
+      get 'conversations' => 'messages#list_conversations'
+      get 'messages' => 'messages#list_receipts'
     end
   end
 
