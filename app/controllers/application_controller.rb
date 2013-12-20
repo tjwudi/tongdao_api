@@ -5,8 +5,8 @@ class ApplicationController < ActionController::API
   # Constants
   MAX_AUTH_INTERVAL = 604800
   ERROR_MSG = {
-    :LOGIN_FAILED => "Login failed, wrong password or email"
-    ,:EMAIL_EXISTS => "Email exists"
+    :LOGIN_FAILED => "Login failed, wrong password or email",
+    :EMAIL_EXISTS => "Email exists"
   }
   
 
