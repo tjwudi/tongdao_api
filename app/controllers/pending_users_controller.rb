@@ -3,11 +3,6 @@ class PendingUsersController < ApplicationController
   skip_before_action :authenticate, only: [:create, :count, :destroy]
 
   def create
-    if User.where(params.permit(:email)).count > 0
-      p "email exists in activated emails list"
-      return render_blank(409)
-    end
-
     @pending_user = PendingUser.create(params.permit(:email))
     
     render "pending_users/show"
